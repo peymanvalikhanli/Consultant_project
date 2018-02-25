@@ -28,7 +28,7 @@ export default class send_file_page extends React.Component{
                     <Left>
                     </Left>
                     <Body>
-                        <Title style={footer_styles.header_btn}>ارسال مدارک</Title>
+                        <Title style={footer_styles.header_btn}></Title>
                     </Body>
                     <Right>
                     </Right>
