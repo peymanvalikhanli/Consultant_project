@@ -8,4 +8,8 @@ export default StyleSheet.create({
         backgroundColor: '#d1dee4',
     },
 
+    list_text_color:{
+        color:'#5bc8d0',
+    },
+
   });

@@ -13,6 +13,7 @@ import home_page from './screens/home';
 import files_page from './screens/files';
 import message_page from './screens/messages';
 import profile_page from './screens/profile';
+import send_file_page from './screens/send_file'; 
 
 import RN from 'react-navigation'
 
@@ -21,7 +22,7 @@ const nave = StackNavigator({
   files: { screen: files_page },
   message: { screen: message_page },
   profile: { screen: profile_page },
-
+  send_file: {screen: send_file_page},
 });
 export default nave;
 

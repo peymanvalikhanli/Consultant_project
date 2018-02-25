@@ -41,7 +41,8 @@ export default class home_page extends React.Component{
                         <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
-                    <ListItem style={ home_styles.file }>
+                    <ListItem style={ home_styles.file }
+                    onPress={()=>this.props.navigation.navigate("send_file") }>
                     <Thumbnail square size={80} source={require('./img/img_file.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال مدارک</Text>
