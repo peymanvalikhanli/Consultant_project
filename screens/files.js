@@ -1,14 +1,13 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body } from 'native-base';
+import {StyleSheet, Image, View} from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch, Title } from 'native-base';
 
+import UserAvatar from 'react-native-user-avatar';
 //import footer style
 import footer_styles from './style/footer';
+import main_styles from './style/main';
 
-import home_styles from './style/home';
-
-
-export default class message_page extends React.Component{
+export default class send_file_page extends React.Component{
 
     async componentWillMount() {
         await Expo.Font.loadAsync({
@@ -18,42 +17,70 @@ export default class message_page extends React.Component{
       }
 
     static navigationOptions = {
-        title:'پرونده',
+        title:'',
         header: null,
     }; 
     render(){ 
         var {navigate}=this.props.navigation; 
         return(
-            <Container style={ home_styles.body }>
-                <List>
-                    <ListItem style={ home_styles.clling } >
-                    <Thumbnail square size={80} source={{ uri: '' }} />
+            <Container> 
+                <Header style={footer_styles.header}>
+                    <Left>
+                    </Left>
                     <Body>
-                        <Text style={ home_styles.text }>تماس با مشاور</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
+                        <Title style={footer_styles.header_btn}>ارسال مدارک</Title>
                     </Body>
+                    <Right>
+                    </Right>
+                </Header>                   
+                <List style={main_styles.list}>    
+                    <ListItem itemDivider style={main_styles.list_div}>
+                        <Text>
+                            پرونده های درحال اجرا
+                        </Text>
                     </ListItem>
-                    <ListItem style={ home_styles.message }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>ارسال پیام</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
+                    
+                    <ListItem icon>
+                        <Body>
+                            <Text style={main_styles.list_text_color}>
+                            بیمه نامه سال قبل
+                            </Text>
+                        </Body>
+                        <Right>
+                            <Icon name="arrow-forward" />
+                        </Right>
                     </ListItem>
-                    <ListItem style={ home_styles.file }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>ارسال مدارک</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
+                    <ListItem itemDivider style={main_styles.list_div}>
+                        <Text>
+                            پرونده های انجام شده
+                        </Text>
                     </ListItem>
-                    <ListItem style={ home_styles.profile }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>پروفایل</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
-                    </ListItem>    
+                    <ListItem icon>
+                        <Body>
+                            <Text style={main_styles.list_text_color}>
+                            کارت ملی
+                            </Text>
+                        </Body>
+                        <Right>
+                            <Icon name="arrow-forward" />
+                        </Right>
+                    </ListItem>
+                    <ListItem itemDivider style={main_styles.list_div}>
+                        <Text>
+                            پرونده های لغو شده
+                        </Text>
+                    </ListItem>
+                    <ListItem icon>
+                        <Body>
+                            <Text style={main_styles.list_text_color}>
+                            کارت ملی
+                            </Text>
+                        </Body>
+                        <Right>
+                            <Icon name="arrow-forward" />
+                        </Right>
+                    </ListItem>
+                    
                 </List>
             <Content />
             <Footer 
@@ -62,9 +89,9 @@ export default class message_page extends React.Component{
                 <FooterTab>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("files") }
+                        
                     >
-                        <Icon active name="folder-open" style={footer_styles.footer_btn} />
+                        <Icon active name="folder-open" style={footer_styles.footer_btn_active} />
                         <Text style={footer_styles.footer_btn}>پرونده</Text>
                     </Button>
                     <Button 
