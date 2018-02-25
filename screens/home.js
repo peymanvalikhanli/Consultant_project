@@ -18,7 +18,7 @@ export default class home_page extends React.Component{
 
     static navigationOptions = {
         title:'',
-        
+        header: null,
     }; 
   
     render(){ 

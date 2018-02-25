@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Image} from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch } from 'native-base';
+import {StyleSheet, Image, View} from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch, Title } from 'native-base';
 
 import UserAvatar from 'react-native-user-avatar';
 //import footer style
@@ -20,16 +20,38 @@ export default class profile_page extends React.Component{
 
     static navigationOptions = {
         title:'',
-        
+        header: null,
     }; 
     render(){ 
         var {navigate}=this.props.navigation; 
         return(
-            <Container>
-                <UserAvatar name="ت ص و ی ر" size={150} />
-                <Text>نام و نام خانوادگی</Text>
-                <Text></Text>
-                <Text>+۹۸ ۹۳۶ ۵۸۲ ۰۷۲۳</Text>
+            <Container> 
+                <Header>
+                <Left>
+            <Button transparent>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>پروفایل</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+                <Text style={{color: '#0000FF',}}>ویرایش</Text>
+            </Button>
+          </Right>
+                </Header>                   
+                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 100}}>
+                    <View>
+                        <UserAvatar name="ت ص و ی ر" size={150} />
+                    </View>
+                    <View>
+                        <Text>نام و نام خانوادگی</Text>
+                    </View>
+                    <View>
+                        <Text>+۹۸ ۹۳۶ ۵۸۲ ۰۷۲۳</Text>
+                    </View>
+                </View>
                  <List>
                     <ListItem itemDivider>
                         <Text></Text>

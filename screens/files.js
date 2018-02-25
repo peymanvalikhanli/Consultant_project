@@ -19,7 +19,7 @@ export default class message_page extends React.Component{
 
     static navigationOptions = {
         title:'پرونده',
-        
+        header: null,
     }; 
     render(){ 
         var {navigate}=this.props.navigation; 
