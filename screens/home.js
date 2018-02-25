@@ -28,21 +28,21 @@ export default class home_page extends React.Component{
                <Header style={footer_styles.header}/>
                 <List>
                     <ListItem style={ home_styles.clling } >
-                    <Thumbnail square size={80} source={{ uri: '' }} />
+                    <Thumbnail square size={80} source={require('./img/img_call.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>تماس با مشاور</Text>
                         <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.message }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
+                    <Thumbnail square size={80} source={require('./img/img_new_meassage.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال پیام</Text>
                         <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.file }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
+                    <Thumbnail square size={80} source={require('./img/img_file.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال مدارک</Text>
                         <Text note style={ home_styles.text }>_________________________________</Text>
@@ -50,7 +50,7 @@ export default class home_page extends React.Component{
                     </ListItem>
                     <ListItem style={ home_styles.profile }
                      onPress={()=>this.props.navigation.navigate("profile") }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
+                    <Thumbnail square size={80} source={require('./img/img_profile.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>پروفایل</Text>
                         <Text note style={ home_styles.text }>_________________________________</Text>
@@ -76,12 +76,9 @@ export default class home_page extends React.Component{
                         <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
                         <Text style={footer_styles.footer_btn}>پیام</Text>
                     </Button>
-                    <Button 
-                        vertical
-                        onPress={()=>this.props.navigation.navigate("Home") }
-                    >
-                        <Icon active name="md-home" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>خانه</Text>
+                    <Button vertical>
+                        <Icon active name="md-home" style={footer_styles.footer_btn_active} />
+                        <Text style={footer_styles.footer_btn_active}>خانه</Text>
                     </Button>
                 </FooterTab>
             </Footer>
