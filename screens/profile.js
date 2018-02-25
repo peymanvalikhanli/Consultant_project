@@ -26,7 +26,6 @@ export default class profile_page extends React.Component{
         var {navigate}=this.props.navigation; 
         return(
             <Container>
-                sss
                 <UserAvatar name="ت ص و ی ر" size={150} />
                 <Text>نام و نام خانوادگی</Text>
                 <Text></Text>
