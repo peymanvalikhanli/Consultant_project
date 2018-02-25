@@ -25,6 +25,7 @@ export default class home_page extends React.Component{
         var {navigate}=this.props.navigation; 
         return(
             <Container style={ home_styles.body }>
+               <Header style={footer_styles.header}/>
                 <List>
                     <ListItem style={ home_styles.clling } >
                     <Thumbnail square size={80} source={{ uri: '' }} />

@@ -5,9 +5,7 @@ import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List
 import UserAvatar from 'react-native-user-avatar';
 //import footer style
 import footer_styles from './style/footer';
-
-import profile_styles from './style/profile';
-
+import main_styles from './style/main';
 
 export default class profile_page extends React.Component{
 
@@ -26,22 +24,23 @@ export default class profile_page extends React.Component{
         var {navigate}=this.props.navigation; 
         return(
             <Container> 
-                <Header>
+                <Header style={footer_styles.header}>
                 <Left>
-            <Button transparent>
-              <Icon name='arrow-back' />
+            <Button transparent
+            onPress={()=>this.props.navigation.navigate("Home") }>
+              <Icon style={footer_styles.header_btn} name='arrow-back' />
             </Button>
           </Left>
           <Body>
-            <Title>پروفایل</Title>
+            <Title style={footer_styles.header_btn}>پروفایل</Title>
           </Body>
           <Right>
-            <Button transparent>
-                <Text style={{color: '#0000FF',}}>ویرایش</Text>
+            <Button transparent> 
+                <Text style={footer_styles.header_btn}>ویرایش</Text>
             </Button>
           </Right>
                 </Header>                   
-                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 100}}>
+                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 100 , backgroundColor:'#ffffff'}}>
                     <View>
                         <UserAvatar name="ت ص و ی ر" size={150} />
                     </View>
@@ -52,8 +51,8 @@ export default class profile_page extends React.Component{
                         <Text>+۹۸ ۹۳۶ ۵۸۲ ۰۷۲۳</Text>
                     </View>
                 </View>
-                 <List>
-                    <ListItem itemDivider>
+                 <List style={main_styles.list}>
+                    <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -78,7 +77,7 @@ export default class profile_page extends React.Component{
                         <Icon name="arrow-forward" />
                     </Right>
                     </ListItem>
-                    <ListItem itemDivider>
+                    <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -103,7 +102,7 @@ export default class profile_page extends React.Component{
                         <Icon name="checkmark" />
                     </Right>
                     </ListItem>
-                    <ListItem itemDivider>
+                    <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
