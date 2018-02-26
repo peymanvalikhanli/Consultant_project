@@ -26,6 +26,7 @@ export default class home_page extends React.Component{
         return(
             <Container style={ home_styles.body }>
                <Header style={footer_styles.header}/>
+               <Content>
                 <List>
                     <ListItem style={ home_styles.clling } >
                     <Thumbnail square size={80} source={require('./img/img_call.png')} style={home_styles.btn_img} />
@@ -58,7 +59,7 @@ export default class home_page extends React.Component{
                     </Body>
                     </ListItem>    
                 </List>
-            <Content />
+            </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >

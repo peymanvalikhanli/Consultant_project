@@ -32,7 +32,8 @@ export default class send_file_page extends React.Component{
                     </Body>
                     <Right>
                     </Right>
-                </Header>                   
+                </Header>   
+                <Content>                
                 <List style={main_styles.list}>    
                     <ListItem itemDivider style={main_styles.list_div}>
                         <Text>
@@ -82,7 +83,7 @@ export default class send_file_page extends React.Component{
                     </ListItem>
                     
                 </List>
-            <Content />
+            </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >

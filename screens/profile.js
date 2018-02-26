@@ -25,22 +25,23 @@ export default class profile_page extends React.Component{
         return(
             <Container> 
                 <Header style={footer_styles.header}>
-                <Left>
-            <Button transparent
-            onPress={()=>this.props.navigation.navigate("Home") }>
-              <Icon style={footer_styles.header_btn} name='arrow-back' />
-            </Button>
-          </Left>
-          <Body>
-            <Title style={footer_styles.header_btn}>پروفایل</Title>
-          </Body>
-          <Right>
-            <Button transparent> 
-                <Text style={footer_styles.header_btn}>ویرایش</Text>
-            </Button>
-          </Right>
-                </Header>                   
-                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 100 , backgroundColor:'#ffffff'}}>
+                    <Left>
+                        <Button transparent
+                        onPress={()=>this.props.navigation.navigate("Home") }>
+                        <Icon style={footer_styles.header_btn} name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title style={footer_styles.header_btn}>پروفایل</Title>
+                    </Body>
+                    <Right>
+                        <Button transparent> 
+                            <Text style={footer_styles.header_btn}>ویرایش</Text>
+                        </Button>
+                    </Right>
+                </Header>
+                <Content>                   
+                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 10 , backgroundColor:'#ffffff'}}>
                     <View>
                         <UserAvatar name="ت ص و ی ر" size={150} />
                     </View>
@@ -117,7 +118,7 @@ export default class profile_page extends React.Component{
                         </Right>
                     </ListItem>
                 </List>
-            <Content />
+            </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >

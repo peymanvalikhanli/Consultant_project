@@ -25,37 +25,25 @@ export default class message_page extends React.Component{
         var {navigate}=this.props.navigation; 
         return(
             <Container style={ home_styles.body }>
-                <List>
-                    <ListItem style={ home_styles.clling } >
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>تماس با مشاور</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
-                    </ListItem>
-                    <ListItem style={ home_styles.message }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>ارسال پیام</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
-                    </ListItem>
-                    <ListItem style={ home_styles.file }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>ارسال مدارک</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
-                    </ListItem>
-                    <ListItem style={ home_styles.profile }>
-                    <Thumbnail square size={80} source={{ uri: '' }} />
-                    <Body>
-                        <Text style={ home_styles.text }>پروفایل</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
-                    </Body>
-                    </ListItem>    
-                </List>
-            <Content />
+               <Content>
+                    <List
+                        dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+                        renderRow={data =>
+                        <ListItem>
+                            <Text> {data} </Text>
+                        </ListItem>}
+                        renderLeftHiddenRow={data =>
+                        <Button full onPress={() => alert(data)}>
+                            <Icon active name="information-circle" />
+                        </Button>}
+                        renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+                        <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
+                            <Icon active name="trash" />
+                        </Button>}
+                        leftOpenValue={75}
+                        rightOpenValue={-75}
+                    />
+                </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >

@@ -36,7 +36,8 @@ export default class send_file_page extends React.Component{
                     </Body>
                     <Right>
                     </Right>
-                </Header>                   
+                </Header>
+                <Content>                   
                 <List style={main_styles.list}>    
                     <ListItem icon>
                         <Body>
@@ -102,7 +103,7 @@ export default class send_file_page extends React.Component{
                         </Right>
                     </ListItem>
                 </List>
-            <Content />
+            </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >
