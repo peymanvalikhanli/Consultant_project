@@ -1,14 +1,54 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body } from 'native-base';
+import {StyleSheet, ListView} from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 
 //import footer style
 import footer_styles from './style/footer';
 
 import home_styles from './style/home';
 
+const datas = [
+    'Simon Mignolet',
+    'Nathaniel Clyne',
+    'Dejan Lovren',
+    'Mama Sakho',
+    'Alberto Moreno',
+    'Emre Can',
+    'Joe Allen',
+    'Phil Coutinho',
+    'Simon Mignolet',
+    'Nathaniel Clyne',
+    'Dejan Lovren',
+    'Mama Sakho',
+    'Alberto Moreno',
+    'Emre Can',
+    'Joe Allen',
+    'Phil Coutinho',
+    'Simon Mignolet',
+    'Nathaniel Clyne',
+    'Dejan Lovren',
+    'Mama Sakho',
+    'Alberto Moreno',
+    'Emre Can',
+    'Joe Allen',
+    'Phil Coutinho',
+  ];
 
 export default class message_page extends React.Component{
+    constructor(props) {
+        super(props);
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this.state = {
+          basic: true,
+          listViewData: datas,
+        };
+      }
+      deleteRow(secId, rowId, rowMap) {
+        rowMap[`${secId}${rowId}`].props.closeRow();
+        const newData = [...this.state.listViewData];
+        newData.splice(rowId, 1);
+        this.setState({ listViewData: newData });
+      }
 
     async componentWillMount() {
         await Expo.Font.loadAsync({
@@ -18,30 +58,34 @@ export default class message_page extends React.Component{
       }
 
     static navigationOptions = {
-        title:'پیام',
+        title:'',
         header: null,
     }; 
     render(){ 
         var {navigate}=this.props.navigation; 
         return(
-            <Container style={ home_styles.body }>
+            <Container>
+                <Header style={footer_styles.header}/>
                <Content>
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
-                        <ListItem>
-                            <Text> {data} </Text>
+                        <ListItem icon >
+                            <Left style={{paddingLeft:10}}>
+                                <Icon name="mail" />
+                            </Left>
+                            <Body>
+                                <Text>{data}</Text>
+                            </Body>
+                            <Right>
+                            <Icon name="send"/>
+                            </Right>
                         </ListItem>}
-                        renderLeftHiddenRow={data =>
-                        <Button full onPress={() => alert(data)}>
-                            <Icon active name="information-circle" />
-                        </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
                         <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
                             <Icon active name="trash" />
                         </Button>}
-                        leftOpenValue={75}
-                        rightOpenValue={-75}
+                         rightOpenValue={-75}
                     />
                 </Content>
             <Footer 
@@ -57,10 +101,9 @@ export default class message_page extends React.Component{
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("message") }
                     >
-                        <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پیام</Text>
+                        <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn_active} />
+                        <Text style={footer_styles.footer_btn_active}>پیام</Text>
                     </Button>
                     <Button 
                         vertical
