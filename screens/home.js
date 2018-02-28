@@ -52,12 +52,20 @@ export default class home_page extends React.Component{
                     </ListItem>
                     <ListItem style={ home_styles.profile }
                      onPress={()=>this.props.navigation.navigate("profile") }>
+                    <Thumbnail square size={80} source={require('./img/img_location.png')} style={home_styles.btn_img} />
+                    <Body>
+                        <Text style={ home_styles.text }>ارسال موقعیت جغرافیای</Text>
+                        <Text note style={ home_styles.text }>_________________________________</Text>
+                    </Body>
+                    </ListItem>
+                    <ListItem style={ home_styles.profile }
+                     onPress={()=>this.props.navigation.navigate("profile") }>
                     <Thumbnail square size={80} source={require('./img/img_profile.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>پروفایل</Text>
                         <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
-                    </ListItem>    
+                    </ListItem>        
                 </List>
             </Content>
             <Footer 

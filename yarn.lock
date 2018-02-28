@@ -3908,6 +3908,10 @@ react-native-material-ui@^1.19.0:
     prop-types "^15.5.10"
     react-native-material-design-styles "^0.2.6"
 
+react-native-page-swiper@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-page-swiper/-/react-native-page-swiper-0.3.0.tgz#657eb0e14316052e80055d9a56d28039114ffcc6"
+
 react-native-router-flux@^4.0.0-beta.28:
   version "4.0.0-beta.28"
   resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.28.tgz#1d39cf176c88d0658af03cfa80dfb4a8eb284619"
@@ -3925,6 +3929,12 @@ react-native-safe-area-view@^0.6.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.6.0.tgz#ce01eb27905a77780219537e0f53fe9c783a8b3d"
   dependencies:
     hoist-non-react-statics "^2.3.1"
+
+react-native-swiper-flatlist@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-swiper-flatlist/-/react-native-swiper-flatlist-1.0.3.tgz#c6c47498f30be048d6465c2d7c850b8d55bfc97d"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-tab-view@^0.0.70:
   version "0.0.70"
