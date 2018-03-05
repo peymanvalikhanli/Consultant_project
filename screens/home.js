@@ -32,14 +32,12 @@ export default class home_page extends React.Component{
                     <Thumbnail square size={80} source={require('./img/img_call.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>تماس با مشاور</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.message }>
                     <Thumbnail square size={80} source={require('./img/img_new_meassage.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال پیام</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.file }
@@ -47,15 +45,13 @@ export default class home_page extends React.Component{
                     <Thumbnail square size={80} source={require('./img/img_file.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال مدارک</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
-                    <ListItem style={ home_styles.profile }
-                     onPress={()=>this.props.navigation.navigate("profile") }>
+                    <ListItem style={ home_styles.location }
+                     onPress={()=>this.props.navigation.navigate("location") }>
                     <Thumbnail square size={80} source={require('./img/img_location.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>ارسال موقعیت جغرافیای</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.profile }
@@ -63,7 +59,6 @@ export default class home_page extends React.Component{
                     <Thumbnail square size={80} source={require('./img/img_profile.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>پروفایل</Text>
-                        <Text note style={ home_styles.text }>_________________________________</Text>
                     </Body>
                     </ListItem>        
                 </List>
@@ -71,7 +66,7 @@ export default class home_page extends React.Component{
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab>
+                <FooterTab style={ footer_styles.footer_body }>
                     <Button 
                         vertical
                         onPress={()=>this.props.navigation.navigate("files") }

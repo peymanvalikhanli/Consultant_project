@@ -58,24 +58,26 @@ export default class profile_page extends React.Component{
                     </ListItem>     
                     <ListItem icon>
                         <Left>
-                            <Icon name="map" />
+                            
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text>زبان</Text>
                         </Body>
                         <Right>
-                            <Icon name="arrow-forward" />
+                        <Icon name="map" />
                         </Right>
                     </ListItem>
                     <ListItem icon>
                     <Left>
-                        <Icon name="mail" />
+                        
+                        <Icon name="arrow-back" />
                     </Left>
                     <Body>
                         <Text>پیام ها</Text>
                     </Body>
                     <Right>
-                        <Icon name="arrow-forward" />
+                    <Icon name="mail" />
                     </Right>
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
@@ -83,24 +85,24 @@ export default class profile_page extends React.Component{
                     </ListItem>     
                     <ListItem icon>
                         <Left>
-                            <Icon name="card" />
+                        <Icon name="checkmark" /> 
                         </Left>
                         <Body>
                         <Text>عکس کارت ملی</Text>                           
                         </Body>
                         <Right>
-                            <Icon name="checkmark" />
+                        <Icon name="card" />
                         </Right>
                     </ListItem>
                     <ListItem icon>
                     <Left>
-                        <Icon name="card" />
+                    <Icon name="checkmark" />
                     </Left>
                     <Body>
                         <Text>عکس شناسنامه</Text>
                     </Body>
                     <Right>
-                        <Icon name="checkmark" />
+                    <Icon name="card" />
                     </Right>
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
@@ -108,13 +110,13 @@ export default class profile_page extends React.Component{
                     </ListItem>     
                     <ListItem icon>
                         <Left>
-                            <Icon name="help-buoy" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                         <Text>راهنما</Text>                           
                         </Body>
                         <Right>
-                            <Icon name="arrow-forward" />
+                        <Icon name="help-buoy" />
                         </Right>
                     </ListItem>
                 </List>
@@ -122,7 +124,8 @@ export default class profile_page extends React.Component{
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab>
+                <FooterTab
+                style={ footer_styles.footer_body }>
                     <Button 
                         vertical
                         onPress={()=>this.props.navigation.navigate("files") }

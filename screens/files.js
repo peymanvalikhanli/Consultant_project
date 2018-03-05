@@ -36,50 +36,57 @@ export default class send_file_page extends React.Component{
                 <Content>                
                 <List style={main_styles.list}>    
                     <ListItem itemDivider style={main_styles.list_div}>
-                        <Text>
+                        <Body>
+                            <Text>
                             پرونده های درحال اجرا
                         </Text>
+                        </Body>
                     </ListItem>
                     
                     <ListItem icon>
+                    <Left>
+                            <Icon name="arrow-back" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             بیمه نامه سال قبل
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
+                        
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
+                        <Body>
                         <Text>
                             پرونده های انجام شده
                         </Text>
+                        </Body>
                     </ListItem>
                     <ListItem icon>
+                    <Left>
+                            <Icon name="arrow-back" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             کارت ملی
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
+                       <Body>
                         <Text>
                             پرونده های لغو شده
                         </Text>
+                        </Body>
                     </ListItem>
                     <ListItem icon>
+                    <Left>
+                            <Icon name="arrow-back" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             کارت ملی
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     
                 </List>
@@ -87,7 +94,8 @@ export default class send_file_page extends React.Component{
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab>
+                <FooterTab
+                style={ footer_styles.footer_body }>
                     <Button 
                         vertical
                         

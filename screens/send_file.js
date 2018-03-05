@@ -107,7 +107,8 @@ export default class send_file_page extends React.Component{
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab>
+                <FooterTab
+                style={ footer_styles.footer_body }>
                     <Button 
                         vertical
                         onPress={()=>this.props.navigation.navigate("files") }

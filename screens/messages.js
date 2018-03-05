@@ -8,30 +8,24 @@ import footer_styles from './style/footer';
 import home_styles from './style/home';
 
 const datas = [
-    'Simon Mignolet',
-    'Nathaniel Clyne',
-    'Dejan Lovren',
-    'Mama Sakho',
-    'Alberto Moreno',
-    'Emre Can',
-    'Joe Allen',
-    'Phil Coutinho',
-    'Simon Mignolet',
-    'Nathaniel Clyne',
-    'Dejan Lovren',
-    'Mama Sakho',
-    'Alberto Moreno',
-    'Emre Can',
-    'Joe Allen',
-    'Phil Coutinho',
-    'Simon Mignolet',
-    'Nathaniel Clyne',
-    'Dejan Lovren',
-    'Mama Sakho',
-    'Alberto Moreno',
-    'Emre Can',
-    'Joe Allen',
-    'Phil Coutinho',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
+    'پیمان ولیخانلی',
+    'آناهیتا نیک بخت',
   ];
 
 export default class message_page extends React.Component{
@@ -72,13 +66,13 @@ export default class message_page extends React.Component{
                         renderRow={data =>
                         <ListItem icon >
                             <Left style={{paddingLeft:10}}>
-                                <Icon name="mail" />
+                              
                             </Left>
                             <Body>
                                 <Text>{data}</Text>
                             </Body>
                             <Right>
-                            <Icon name="send"/>
+                            <Icon name="mail"/>
                             </Right>
                         </ListItem>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
@@ -91,7 +85,8 @@ export default class message_page extends React.Component{
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab>
+                <FooterTab
+                style={ footer_styles.footer_body }>
                     <Button 
                         vertical
                         onPress={()=>this.props.navigation.navigate("files") }
