@@ -30,4 +30,5 @@ const nave = StackNavigator({
 });
 export default nave;
 
+
 AppRegistry.registerComponent('flow',nave)

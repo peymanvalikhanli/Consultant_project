@@ -1,0 +1,18 @@
+{
+    "message":"پیغام",
+    "error":"خطا",
+    "ok":"بله", 
+    "yes":"بله",
+    "no":"خیر",
+    "cancel":"لغو",
+    "send":"ارسال", 
+
+    "check_internet_connection":"لطفا اتصال اینترنت را چک کنید ",
+    
+    "system_login":"ورود به سیستم", 
+
+    "filling_the_phone_number":"لطفا تلفن خود را درست وارد کنید",
+    "filling_the_country_id":"لطفا کد کشور خود را درست وارد کنید",
+
+    "":""
+}

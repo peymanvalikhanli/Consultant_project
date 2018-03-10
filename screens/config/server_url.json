@@ -1,0 +1,10 @@
+{
+    "mobo_user":"http://app.fonoontadbir.ir/controller_robo/controller_mobo_users.php", 
+    "attachments":"http://app.fonoontadbir.ir/controller_robo/controller_attachments.php",
+    "files":"http://app.fonoontadbir.ir/controller_robo/controller_files.php",
+    "files_attachments":"http://app.fonoontadbir.ir/controller_robo/controller_files_attachments.php",
+    "locations":"http://app.fonoontadbir.ir/controller_robo/controller_locations.php",
+    "messages":"http://app.fonoontadbir.ir/controller_robo/controller_messages.php",
+    "setting":"http://app.fonoontadbir.ir/controller_robo/controller_setting.php",
+    "user_location":"http://app.fonoontadbir.ir/controller_robo/controller_user_location.php"
+}

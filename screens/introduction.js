@@ -1,31 +1,74 @@
 
 import React, { PureComponent } from 'react';
-import { Dimensions, Image, StyleSheet, View, NetInfo } from 'react-native';
-
+import { Dimensions, Image, StyleSheet, View, NetInfo, Alert } from 'react-native';
 import { Container, Header, Content, Footer, Button, Icon, Text, Body, Left, Right ,Form, Item, Input, Label } from 'native-base';
-
-//http://app.fonoontadbir.ir/controller_robo/controller_locations.php
-
+import Orientation from 'react-native-orientation';
 import SwiperFlatList from 'react-native-swiper-flatlist';
+
+import RNExitApp from 'react-native-exit-app';
 
 //import footer style
 import footer_styles from './style/footer';
 
+import lang from './localization/fa.json';
 
-NetInfo.isConnected.fetch().then(isConnected => {
-    alert('First, is ' + (isConnected ? 'online' : 'offline'));
-  });
-  function handleFirstConnectivityChange(isConnected) {
-    alert('Then, is ' + (isConnected ? 'online' : 'offline'));
+import server_url from './config/server_url.json';
+
+import axios from 'axios';
+
+
+async function send_data(tel) {
+    let url = 'http://app.fonoontadbir.ir/controller_robo/controller_mobo_users.php';
+    let response = await //fetch(url);
+    fetch(url, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    act: 'mobo_users_set',
+    tel: tel,
+  }),
+});
+    let body = await response.json();
+    if(body.msg!= undefined || body.msg != null){
+        alert(body.msg);
+        return -1;
+    }
+    if(body.data!= undefined || body.data != null ){
+        if(body.data == 1){
+           // this.props.navigation.navigate("message");
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    //return body;
+}
+
+function handleFirstConnectivityChange(isConnected) {
+    if(!isConnected){
+        
+        Alert.alert(
+            lang.error,
+            lang.check_internet_connection,
+            [
+              {text: 'بله', onPress: () => RNExitApp.exitApp()},
+            ],
+            { cancelable: false }
+          )
+    }
     NetInfo.isConnected.removeEventListener(
       'connectionChange',
       handleFirstConnectivityChange
     );
-  }
-  NetInfo.isConnected.addEventListener(
+}
+NetInfo.isConnected.addEventListener(
     'connectionChange',
     handleFirstConnectivityChange
-  );
+);
+
 
  
 export default class App extends PureComponent {
@@ -41,37 +84,90 @@ export default class App extends PureComponent {
       this.state={
           country_id:"+98",
           phone_number:null,
+          is_change_page : false,
       }
-   
+      Orientation.lockToPortrait();
     }
 
+    change_page(){
+        if(this.state.is_change_page){
+            this.props.navigation.replace("Home");
+        }
+    }
+    
     btn_send_OnClick (){
-        alert("phone number is :\n"+this.state.country_id+""+this.state.phone_number);
+       
+        if(this.state.phone_number== null || this.state.phone_number == undefined || this.state.phone_number.length<10)
+        {
+            Alert.alert(
+                lang.error,
+                lang.filling_the_phone_number,
+                [
+                    {text: lang.ok},
+                ],
+                { cancelable: false });
+            return;
+        }
+        if(this.state.country_id== null || this.state.country_id == undefined || this.state.country_id.length<3)
+        {
+            Alert.alert(
+                lang.error,
+                lang.filling_the_country_id,
+                [
+                    {text: lang.ok},
+                ],
+                { cancelable: false });
+                return;
+        }
+       
+        axios.post(server_url.mobo_user, {
+            act: 'mobo_users_set',
+            tel: this.state.country_id+""+this.state.phone_number,
+          })
+          .then(response=> {
+            
+            if(response.data.msg != undefined || response.data.msg != null){
+                alert(response.data.msg);
+            }
+            if(response.data.data!= undefined || response.data.data != null ){
+                if(response.data.data == 1){
+                    this.setState({is_change_page:true});
+                    this.change_page();
+                }else{
+                   alert(lang.error);
+                }
+            }
+                      
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+
     }
 
     render() {
+        var {navigate}=this.props.navigation; 
     return (
        <Container>
             <Header style={footer_styles.header}/>
             <Content>
-                <View style={styles.container}>
+                <View key="view_1" style={styles.container}>
                     <SwiperFlatList
                     showPagination
                     >
-                        <View style={styles.child}>
-                            <Body>
-                                <Image
-                                    source={require("./img/introduction.gif")}
+                        <View key="view_1_1" style={[styles.child,{backgroundColor:"#f5f5f5"}]}>
+                            <Body style={{backgroundColor:"#f0f0f0"}}>
+                                <Image 
+                                    style={styles.img}
+                                    source={require("./img/introduction.png")}
                                 />
                             </Body>
                         </View>
-                        <View style={styles.child}>
-                            
-                        </View>
-                        <View style={styles.child}>
+                        <View key="view_1_2" style={styles.child}>
                             <Body>
                                 <Text style={styles.text}>
-                                ورود به سیستم 
+                                {lang.system_login}
                                 </Text>
                                 <Form style={styles.form} >
                                     <Item inlineLabel>
@@ -96,7 +192,7 @@ export default class App extends PureComponent {
                                 >
                                     <Body>
                                         <Text style={{color:"#ffffff"}}>
-                                            ارسال 
+                                            {lang.send}
                                         </Text>
                                     </Body>
                                 </Button>
@@ -137,5 +233,13 @@ const styles = StyleSheet.create({
     marginTop: height*0.2,
     width:width*0.4,
     backgroundColor:"#1bbbc4",
+  },
+  img:{
+      width,
+      height:width*0.9,
+      marginTop: width*0.1,
+      justifyContent: 'center',
+      alignItems: 'stretch',
+      resizeMode: 'stretch',
   },
 });
