@@ -40,12 +40,13 @@ export default class upload_file_page extends React.Component{
     render(){ 
         var {navigate}=this.props.navigation;
         var name = this.props.navigation.state.params.name ;
+        var parent = this.props.navigation.state.params.parent ;
         return(
             <Container>
                 <Header style={footer_styles.header}>
                     <Left>
                         <Button transparent
-                        onPress={()=>this.props.navigation.replace("profile") }>
+                        onPress={()=>this.props.navigation.replace(parent) }>
                         <Icon style={footer_styles.header_btn} name='arrow-back' />
                         </Button>
                     </Left>

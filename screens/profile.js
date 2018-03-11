@@ -111,7 +111,7 @@ export default class profile_page extends React.Component{
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon
-                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.national_card_imge})}
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.national_card_imge,parent:"profile"})}
                     >
                         <Left>
                         <Icon name="checkmark" /> 
@@ -126,7 +126,7 @@ export default class profile_page extends React.Component{
                         </Right>
                     </ListItem>
                     <ListItem icon
-                   onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Photo_ID})}
+                   onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Photo_ID,parent:"profile"})}
                     >
                     <Left>
                     <Icon name="checkmark" />

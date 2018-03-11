@@ -29,78 +29,92 @@ export default class send_file_page extends React.Component{
                 <Header style={footer_styles.header}>
                     <Left>
                         <Button transparent
-                        onPress={()=>this.props.navigation.navigate("Home") }>
+                        onPress={()=>this.props.navigation.replace("Home") }>
                         <Icon style={footer_styles.header_btn} name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>
-                        <Title style={footer_styles.header_btn}>ارسال مدارک</Title>
+                        <Title style={footer_styles.header_btn}>
+                            {lang.send_file}
+                        </Title>
                     </Body>
                     <Right>
                     </Right>
                 </Header>
                 <Content>                   
                 <List style={main_styles.list}>    
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Insurance_policy_of_the_previous_year,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            بیمه نامه سال قبل
+                            {lang.Insurance_policy_of_the_previous_year}
                             </Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Proposal_form_filled,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            فرم پیشنهاد پر شده
+                            {lang.Proposal_form_filled}
                             </Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Power_of_Attorney,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            وکالت نامه خرید
+                            {lang.Power_of_Attorney}
                             </Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Power_of_Attorney_Damage,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            وکالت نامه خسارت
+                                {lang.Power_of_Attorney_Damage}
                             </Text>
                         </Body>
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.national_card_imge,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            {lang.national_card_imge}
+                                {lang.national_card_imge}
                             </Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Photo_ID,parent:"send_file"})}
+                    >
                         <Left>
-                            <Icon name="arrow-forward" />
+                            <Icon name="arrow-back" />
                         </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            {lang.Photo_ID}
+                                {lang.Photo_ID}
                             </Text>
                         </Body>
                     </ListItem>
