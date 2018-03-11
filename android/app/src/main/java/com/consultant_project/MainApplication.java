@@ -1,7 +1,6 @@
 package com.consultant_project;
 
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import com.rnfs.RNFSPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;

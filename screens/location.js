@@ -1,16 +1,28 @@
 import React from 'react';
-import {StyleSheet, ListView, View} from 'react-native';
+import { Dimensions, StyleSheet, ListView, View, Geolocation} from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
-
-import MapView from 'react-native-maps';
-
+import Orientation from 'react-native-orientation';
+import MapView ,{ Marker, ProviderPropType }from 'react-native-maps';
 //import footer style
 import footer_styles from './style/footer';
 
 import home_styles from './style/home';
 
+import lang from './localization/fa.json';
+
 
 export default class location_page extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            latitude: 35.6970333,
+            longitude: 51.3524348,
+            error: null,  
+        };
+        Orientation.lockToPortrait();
+        this.onMapPress = this.onMapPress.bind(this);
+      }
 
     async componentWillMount() {
         await Expo.Font.loadAsync({
@@ -19,43 +31,98 @@ export default class location_page extends React.Component{
         });
       }
 
+      componentDidMount() {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              error: null,
+            });
+          },
+          (error) => this.setState({ error: error.message }),
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
+      }
+
     static navigationOptions = {
         title:'',
         header: null,
     }; 
+
+    onMapPress(e) {
+        this.setState({
+            latitude: e.nativeEvent.coordinate.latitude,
+            longitude: e.nativeEvent.coordinate.longitude,
+            error: null,
+          });
+      }
+
+    get_position(){
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+              this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                error: null,
+              });
+            },
+            (error) => this.setState({ error: error.message }),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+          );
+    }
+
     render(){ 
         const { region } = this.props;
         var {navigate}=this.props.navigation; 
+        
         return(
             <Container>
                 <Header style={footer_styles.header}>
                     <Left>
                         <Button transparent
-                        onPress={()=>this.props.navigation.navigate("Home") }>
+                        onPress={()=>this.props.navigation.replace("Home") }>
                         <Icon style={footer_styles.header_btn} name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>
-                        <Title style={footer_styles.header_btn}>ارسال موقیعت</Title>
+                        <Title style={footer_styles.header_btn}> 
+                            {lang.send_location}
+                        </Title>
                     </Body>
-                    <Right/>
+                    <Right>
+                        <Button transparent
+                            onPress={()=>this.get_position() }>
+                            <Icon style={footer_styles.header_btn} name='ios-locate-outline' />
+                        </Button>
+                    </Right>
                 </Header>
                <Content>
-               <View style ={styles.container}>
-        <Text>
-            test page
-            </Text>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        >
-        </MapView>
-      </View>
+                    <Body>
+                      <MapView
+                        style={styles.map}
+                        onPress={this.onMapPress}
+                        region={{
+                            latitude: this.state.latitude,
+                            longitude: this.state.longitude,
+                            latitudeDelta: 0.015,
+                            longitudeDelta: 0.0121,
+                            }}
+                        >
+                           <Marker
+                                coordinate={{latitude: this.state.latitude,
+                                longitude: this.state.longitude}}
+                            />
+                        </MapView>
+                    </Body>
+                    <Button
+                    style={{marginTop:20}}>   
+                        <Body>
+                            <Text style={{color:"#ffffff"}}>
+                                {lang.send}
+                            </Text>
+                        </Body>
+                    </Button>
                 </Content>
                 <Footer 
                 style={ footer_styles.footer_body }
@@ -94,19 +161,22 @@ export default class location_page extends React.Component{
             </Container>
         );
     }
-
 } 
+
+ 
+export const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-      ...StyleSheet.absoluteFillObject,
+        
       height: 400,
       width: 400,
       justifyContent: 'flex-end',
       alignItems: 'center',
     },
     map: {
-      ...StyleSheet.absoluteFillObject,
+     width:width,
+     height:height*0.8,
     },
   });
 

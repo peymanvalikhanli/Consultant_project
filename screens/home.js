@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body } from 'native-base';
-
+import Orientation from 'react-native-orientation';
 //import footer style
 import footer_styles from './style/footer';
 
@@ -32,6 +32,7 @@ export default class home_page extends React.Component{
       this.state={
           calling_number:"02126420740",
       }
+      Orientation.lockToPortrait();
     }
 
     calling(){

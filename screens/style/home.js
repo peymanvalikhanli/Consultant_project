@@ -10,7 +10,7 @@ export default StyleSheet.create({
       marginLeft: 0,
     },
     message: {
-        backgroundColor: '#1ec8d1',
+        backgroundColor: '#00cdd4',
         paddingLeft: 0,
         paddingTop: 20,
         paddingBottom: 20,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
         marginLeft: 0,        
     },
     file: {
-        backgroundColor: '#2fced6',
+        backgroundColor: '#00d3d9',
         paddingLeft: 0,
         paddingTop: 20,
         paddingBottom: 20,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
         marginLeft: 0,      
     },
     location:{
-        backgroundColor: '#64d8de',
+        backgroundColor: '#06dde1',
         paddingLeft: 0,
         paddingTop: 20,
         paddingBottom: 20,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
         marginLeft: 0,
     },
     profile: {
-        backgroundColor: '#68e0e6',
+        backgroundColor: '#57dfe2',
         paddingLeft: 0,
         paddingTop: 20,
         paddingBottom: 20,
