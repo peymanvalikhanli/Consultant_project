@@ -105,14 +105,14 @@ export default class send_file_page extends React.Component{
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("message") }
+                        onPress={()=>this.props.navigation.replace("message") }
                     >
                         <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
                         <Text style={footer_styles.footer_btn}>پیام</Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("Home") }
+                        onPress={()=>this.props.navigation.replace("Home") }
                     >
                         <Icon active name="md-home" style={footer_styles.footer_btn} />
                         <Text style={footer_styles.footer_btn}>خانه</Text>

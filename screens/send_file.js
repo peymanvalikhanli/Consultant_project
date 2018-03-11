@@ -7,6 +7,8 @@ import UserAvatar from 'react-native-user-avatar';
 import footer_styles from './style/footer';
 import main_styles from './style/main';
 
+import lang from './localization/fa.json';
+
 export default class send_file_page extends React.Component{
 
     async componentWillMount() {
@@ -40,67 +42,67 @@ export default class send_file_page extends React.Component{
                 <Content>                   
                 <List style={main_styles.list}>    
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             بیمه نامه سال قبل
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             فرم پیشنهاد پر شده
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             وکالت نامه خرید
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
                             وکالت نامه خسارت
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            کارت ملی
+                            {lang.national_card_imge}
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                     <ListItem icon>
+                        <Left>
+                            <Icon name="arrow-forward" />
+                        </Left>
                         <Body>
                             <Text style={main_styles.list_text_color}>
-                            شناسنامه
+                            {lang.Photo_ID}
                             </Text>
                         </Body>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
                     </ListItem>
                 </List>
             </Content>
@@ -111,24 +113,30 @@ export default class send_file_page extends React.Component{
                 style={ footer_styles.footer_body }>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("files") }
+                        onPress={()=>this.props.navigation.replace("files") }
                     >
                         <Icon active name="folder-open" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پرونده</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.file}
+                        </Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("message") }
+                        onPress={()=>this.props.navigation.replace("message") }
                     >
                         <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پیام</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.messages}
+                        </Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("Home") }
+                        onPress={()=>this.props.navigation.replace("Home") }
                     >
                         <Icon active name="md-home" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>خانه</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.home}
+                        </Text>
                     </Button>
                 </FooterTab>
             </Footer>

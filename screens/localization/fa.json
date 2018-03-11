@@ -6,13 +6,37 @@
     "no":"خیر",
     "cancel":"لغو",
     "send":"ارسال", 
+    "save":"ذخیره",
+    "select":"انتخاب",
 
     "check_internet_connection":"لطفا اتصال اینترنت را چک کنید ",
     
     "system_login":"ورود به سیستم", 
+    "system_verify":"کد تایید", 
 
     "filling_the_phone_number":"لطفا تلفن خود را درست وارد کنید",
     "filling_the_country_id":"لطفا کد کشور خود را درست وارد کنید",
+    "filling_the_verify_code":"لطفا کد تایید را درست وارد کنید",
+
+    "call_by_consultant":"تماس با مشاور",
+    "send_message":"ارسال پیام",
+    "send_file":"ارسال مدارک",
+    "send_location":"ارسال موقعیت جغرافیای",
+    "profile":"پروفایل",
+
+    "file":"پرونده", 
+    "messages":"پیام",
+    "home":"خانه",
+
+    "new_message":"پیام جدید",
+    "title":"عنوان",
+    "text":"متن",
+
+    "name":"نام",
+    "last_name":"نام خانوادگی",
+
+    "national_card_imge":"کارت ملی",
+    "Photo_ID":"شناسنامه",
 
     "":""
 }

@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react';
 import { Dimensions, Image, StyleSheet, View, NetInfo, Alert } from 'react-native';
 import { Container, Header, Content, Footer, Button, Icon, Text, Body, Left, Right ,Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
-import SwiperFlatList from 'react-native-swiper-flatlist';
 
 import RNExitApp from 'react-native-exit-app';
 
@@ -38,7 +37,7 @@ NetInfo.isConnected.addEventListener(
     handleFirstConnectivityChange
 );
  
-export default class introduction_page extends PureComponent {
+export default class verify_page extends PureComponent {
 
     static navigationOptions = {
         title:'',
@@ -49,8 +48,7 @@ export default class introduction_page extends PureComponent {
     {
       super();
       this.state={
-          country_id:"+98",
-          phone_number:null,
+          verify_code:"",
           is_change_page : false,
       }
       Orientation.lockToPortrait();
@@ -58,35 +56,25 @@ export default class introduction_page extends PureComponent {
 
     change_page(){
         if(this.state.is_change_page){
-            this.props.navigation.replace("verify");
+            this.props.navigation.replace("Home");
         }
     }
     
     btn_send_OnClick (){
        
-        if(this.state.phone_number== null || this.state.phone_number == undefined || this.state.phone_number.length<10)
+        if(this.state.verify_code== null || this.state.verify_code == undefined || this.state.verify_code.length<4)
         {
             Alert.alert(
                 lang.error,
-                lang.filling_the_phone_number,
+                lang.filling_the_verify_code,
                 [
                     {text: lang.ok},
                 ],
                 { cancelable: false });
             return;
         }
-        if(this.state.country_id== null || this.state.country_id == undefined || this.state.country_id.length<3)
-        {
-            Alert.alert(
-                lang.error,
-                lang.filling_the_country_id,
-                [
-                    {text: lang.ok},
-                ],
-                { cancelable: false });
-                return;
-        }
        
+        //ُTODO: set verify cod on server data peyman plz doing
         axios.post(server_url.mobo_user, {
             act: 'mobo_users_set',
             tel: this.state.country_id+""+this.state.phone_number,
@@ -118,56 +106,31 @@ export default class introduction_page extends PureComponent {
     return (
        <Container>
             <Header style={footer_styles.header}/>
-            <Content>
-                <View key="view_1" style={styles.container}>
-                    <SwiperFlatList
-                    showPagination
+            <Content> 
+                <Body>
+                    <Text style={styles.text}>
+                    {lang.system_verify}
+                    </Text>
+                    <Form style={styles.form} >
+                        <Item inlineLabel>
+                        <Input
+                            keyboardType="numeric"
+                            placeholder="####"
+                            maxLength={4}
+                            onChange={(event) => this.setState({verify_code: event.nativeEvent.text})}
+                            />
+                        </Item>
+                    </Form>
+                    <Button style={styles.form_btn}
+                    onPress={()=>{this.btn_send_OnClick()}}
                     >
-                        <View key="view_1_1" style={[styles.child,{backgroundColor:"#f5f5f5"}]}>
-                            <Body style={{backgroundColor:"#f0f0f0"}}>
-                                <Image 
-                                    style={styles.img}
-                                    source={require("./img/introduction.png")}
-                                />
-                            </Body>
-                        </View>
-                        <View key="view_1_2" style={styles.child}>
-                            <Body>
-                                <Text style={styles.text}>
-                                {lang.system_login}
-                                </Text>
-                                <Form style={styles.form} >
-                                    <Item inlineLabel>
-                                    <Input
-                                        keyboardType="phone-pad"
-                                        placeholder="+98"
-                                        maxLength={3}
-                                        onChange={(event) => this.setState({country_id: event.nativeEvent.text})}
-                                        >
-                                        +98
-                                    </Input>
-                                    <Input
-                                        keyboardType="phone-pad"
-                                        placeholder="###-####-###"
-                                        maxLength={10}
-                                        onChange={(event) => this.setState({phone_number: event.nativeEvent.text})}
-                                        />
-                                    </Item>
-                                </Form>
-                                <Button style={styles.form_btn}
-                                onPress={()=>{this.btn_send_OnClick()}}
-                                >
-                                    <Body>
-                                        <Text style={{color:"#ffffff"}}>
-                                            {lang.send}
-                                        </Text>
-                                    </Body>
-                                </Button>
-                                
-                            </Body>
-                        </View>
-                    </SwiperFlatList>
-                </View>  
+                        <Body>
+                            <Text style={{color:"#ffffff"}}>
+                                {lang.send}
+                            </Text>
+                        </Body>
+                    </Button>
+                </Body>    
             </Content>    
         </Container>
     );

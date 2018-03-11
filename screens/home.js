@@ -5,7 +5,12 @@ import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List
 //import footer style
 import footer_styles from './style/footer';
 
+import lang from './localization/fa.json';
+
 import home_styles from './style/home';
+
+//import call lib 
+import call from 'react-native-phone-call'
 
 export default class home_page extends React.Component{
 
@@ -20,6 +25,23 @@ export default class home_page extends React.Component{
         title:'',
         header: null,
     }; 
+
+    constructor()
+    {
+      super();
+      this.state={
+          calling_number:"02126420740",
+      }
+    }
+
+    calling(){
+        const args = {
+            number: this.state.calling_number, // String value with the number to call
+            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+          }
+           
+          call(args).catch(console.error)
+    }
   
     render(){ 
         var {navigate}=this.props.navigation; 
@@ -28,37 +50,49 @@ export default class home_page extends React.Component{
                <Header style={footer_styles.header}/>
                <Content>
                 <List>
-                    <ListItem style={ home_styles.clling } >
+                    <ListItem style={ home_styles.clling } 
+                        onPress={()=> this.calling()}>
                     <Thumbnail square size={80} source={require('./img/img_call.png')} style={home_styles.btn_img} />
                     <Body>
-                        <Text style={ home_styles.text }>تماس با مشاور</Text>
+                        <Text style={ home_styles.text }>
+                            {lang.call_by_consultant}
+                        </Text>
                     </Body>
                     </ListItem>
-                    <ListItem style={ home_styles.message }>
+                    <ListItem style={ home_styles.message }
+                        onPress={()=>this.props.navigation.replace("new_message") }>
                     <Thumbnail square size={80} source={require('./img/img_new_meassage.png')} style={home_styles.btn_img} />
                     <Body>
-                        <Text style={ home_styles.text }>ارسال پیام</Text>
+                        <Text style={ home_styles.text }>
+                            {lang.send_message}
+                        </Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.file }
-                    onPress={()=>this.props.navigation.navigate("send_file") }>
+                    onPress={()=>this.props.navigation.replace("send_file") }>
                     <Thumbnail square size={80} source={require('./img/img_file.png')} style={home_styles.btn_img} />
                     <Body>
-                        <Text style={ home_styles.text }>ارسال مدارک</Text>
+                        <Text style={ home_styles.text }>
+                            {lang.send_file}
+                        </Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.location }
-                     onPress={()=>this.props.navigation.navigate("location") }>
+                     onPress={()=>this.props.navigation.replace("location") }>
                     <Thumbnail square size={80} source={require('./img/img_location.png')} style={home_styles.btn_img} />
                     <Body>
-                        <Text style={ home_styles.text }>ارسال موقعیت جغرافیای</Text>
+                        <Text style={ home_styles.text }>
+                            {lang.send_location}
+                        </Text>
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.profile }
-                     onPress={()=>this.props.navigation.navigate("profile") }>
+                     onPress={()=>this.props.navigation.replace("profile") }>
                     <Thumbnail square size={80} source={require('./img/img_profile.png')} style={home_styles.btn_img} />
                     <Body>
-                        <Text style={ home_styles.text }>پروفایل</Text>
+                        <Text style={ home_styles.text }>
+                            {lang.profile}
+                        </Text>
                     </Body>
                     </ListItem>        
                 </List>
@@ -69,21 +103,27 @@ export default class home_page extends React.Component{
                 <FooterTab style={ footer_styles.footer_body }>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("files") }
+                        onPress={()=>this.props.navigation.replace("files") }
                     >
                         <Icon active name="folder-open" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پرونده</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.file}
+                        </Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("message") }
+                        onPress={()=>this.props.navigation.replace("message") }
                     >
                         <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پیام</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.messages}
+                        </Text>
                     </Button>
                     <Button vertical>
                         <Icon active name="md-home" style={footer_styles.footer_btn_active} />
-                        <Text style={footer_styles.footer_btn_active}>خانه</Text>
+                        <Text style={footer_styles.footer_btn_active}>
+                            {lang.home}
+                        </Text>
                     </Button>
                 </FooterTab>
             </Footer>

@@ -2,12 +2,16 @@ import React from 'react';
 import {StyleSheet, Image, View} from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch, Title } from 'native-base';
 
-import UserAvatar from 'react-native-user-avatar';
+import PhotoUpload from 'react-native-photo-upload'
 //import footer style
 import footer_styles from './style/footer';
 import main_styles from './style/main';
 
+import lang from './localization/fa.json';
+
+
 export default class profile_page extends React.Component{
+
 
     async componentWillMount() {
         await Expo.Font.loadAsync({
@@ -27,23 +31,46 @@ export default class profile_page extends React.Component{
                 <Header style={footer_styles.header}>
                     <Left>
                         <Button transparent
-                        onPress={()=>this.props.navigation.navigate("Home") }>
+                        onPress={()=>this.props.navigation.replace("Home") }>
                         <Icon style={footer_styles.header_btn} name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>
-                        <Title style={footer_styles.header_btn}>پروفایل</Title>
+                        <Title style={footer_styles.header_btn}>
+                        {lang.profile}
+                        </Title>
                     </Body>
                     <Right>
-                        <Button transparent> 
+                        <Button transparent
+                        onPress={()=>this.props.navigation.replace("edit_profile") }
+                        > 
                             <Text style={footer_styles.header_btn}>ویرایش</Text>
                         </Button>
                     </Right>
                 </Header>
                 <Content>                   
-                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 10 , backgroundColor:'#ffffff'}}>
+                <View style={{flex: 1, flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: 10 , backgroundColor:'#ffffff',paddingBottom:30}}>
                     <View>
-                        <UserAvatar name="ت ص و ی ر" size={150} />
+                        <PhotoUpload
+                            onPhotoSelect={avatar => {
+                                if (avatar) {
+                                console.log('Image base64 string: ', avatar)
+                                }
+                            }}
+                            >
+                            <Image
+                                style={{
+                                paddingVertical: 30,
+                                width: 150,
+                                height: 150,
+                                borderRadius: 75
+                                }}
+                                resizeMode='cover'
+                                source={
+                                require('./img/default_avatar.jpg')
+                                }
+                            />
+                        </PhotoUpload>
                     </View>
                     <View>
                         <Text>نام و نام خانوادگی</Text>
@@ -53,7 +80,7 @@ export default class profile_page extends React.Component{
                     </View>
                 </View>
                  <List style={main_styles.list}>
-                    <ListItem itemDivider style={main_styles.list_div}>
+                    {/* <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -79,33 +106,41 @@ export default class profile_page extends React.Component{
                     <Right>
                     <Icon name="mail" />
                     </Right>
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
-                    <ListItem icon>
+                    <ListItem icon
+                    onPress={()=>this.props.navigation.replace("upload_file",{name:lang.national_card_imge})}
+                    >
                         <Left>
                         <Icon name="checkmark" /> 
                         </Left>
                         <Body>
-                        <Text>عکس کارت ملی</Text>                           
+                        <Text>
+                            {lang.national_card_imge}
+                        </Text>                           
                         </Body>
                         <Right>
                         <Icon name="card" />
                         </Right>
                     </ListItem>
-                    <ListItem icon>
+                    <ListItem icon
+                   onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Photo_ID})}
+                    >
                     <Left>
                     <Icon name="checkmark" />
                     </Left>
                     <Body>
-                        <Text>عکس شناسنامه</Text>
+                        <Text>
+                            {lang.Photo_ID}
+                        </Text>
                     </Body>
                     <Right>
                     <Icon name="card" />
                     </Right>
                     </ListItem>
-                    <ListItem itemDivider style={main_styles.list_div}>
+                    {/* <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -118,34 +153,40 @@ export default class profile_page extends React.Component{
                         <Right>
                         <Icon name="help-buoy" />
                         </Right>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
             </Content>
             <Footer 
                 style={ footer_styles.footer_body }
             >
-                <FooterTab
+                 <FooterTab
                 style={ footer_styles.footer_body }>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("files") }
+                        onPress={()=>this.props.navigation.replace("files") }
                     >
                         <Icon active name="folder-open" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پرونده</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.file}
+                        </Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("message") }
+                        onPress={()=>this.props.navigation.replace("message") }
                     >
                         <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>پیام</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.messages}
+                        </Text>
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("Home") }
+                        onPress={()=>this.props.navigation.replace("Home") }
                     >
                         <Icon active name="md-home" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>خانه</Text>
+                        <Text style={footer_styles.footer_btn}>
+                            {lang.home}
+                        </Text>
                     </Button>
                 </FooterTab>
             </Footer>

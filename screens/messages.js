@@ -89,7 +89,7 @@ export default class message_page extends React.Component{
                 style={ footer_styles.footer_body }>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("files") }
+                        onPress={()=>this.props.navigation.replace("files") }
                     >
                         <Icon active name="folder-open" style={footer_styles.footer_btn} />
                         <Text style={footer_styles.footer_btn}>پرونده</Text>
@@ -102,7 +102,7 @@ export default class message_page extends React.Component{
                     </Button>
                     <Button 
                         vertical
-                        onPress={()=>this.props.navigation.navigate("Home") }
+                        onPress={()=>this.props.navigation.replace("Home") }
                     >
                         <Icon active name="md-home" style={footer_styles.footer_btn} />
                         <Text style={footer_styles.footer_btn}>خانه</Text>

@@ -1,17 +1,23 @@
 import React from 'react';
-import {StyleSheet, ListView, View} from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
-
-import MapView from 'react-native-maps';
-
+import {StyleSheet, ListView} from 'react-native';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Form, Item, Input, Label } from 'native-base';
+import Orientation from 'react-native-orientation';
 //import footer style
 import footer_styles from './style/footer';
 
+import lang from './localization/fa.json';
+
 import home_styles from './style/home';
 
-
-export default class location_page extends React.Component{
-
+export default class new_message_page extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+         
+        };
+        Orientation.lockToPortrait();
+      }
+      
     async componentWillMount() {
         await Expo.Font.loadAsync({
           'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -24,40 +30,51 @@ export default class location_page extends React.Component{
         header: null,
     }; 
     render(){ 
-        const { region } = this.props;
         var {navigate}=this.props.navigation; 
         return(
             <Container>
                 <Header style={footer_styles.header}>
-                    <Left>
-                        <Button transparent
-                        onPress={()=>this.props.navigation.navigate("Home") }>
-                        <Icon style={footer_styles.header_btn} name='arrow-back' />
-                        </Button>
-                    </Left>
+                    <Left/>
                     <Body>
-                        <Title style={footer_styles.header_btn}>ارسال موقیعت</Title>
+                        <Title style={footer_styles.header_btn}>
+                        {lang.new_message}
+                        </Title>
                     </Body>
                     <Right/>
                 </Header>
                <Content>
-               <View style ={styles.container}>
-        <Text>
-            test page
-            </Text>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        >
-        </MapView>
-      </View>
+                    <Form >
+                        <Item floatingLabel>
+                            <Label>
+                                {lang.title}
+                            </Label>
+                            <Input
+                                maxLength={50}
+                                onChange={(event) => this.setState({country_id: event.nativeEvent.text})}
+                                />
+                                
+                        </Item>
+                        <Item floatingLabel>
+                            <Label>
+                                {lang.text}
+                            </Label>
+                            <Input
+                                multiline
+                                onChange={(event) => this.setState({country_id: event.nativeEvent.text})}
+                                />
+                                
+                        </Item>
+                    </Form>
+                    <Button
+                    style={{marginTop:20}}>   
+                        <Body>
+                            <Text style={{color:"#ffffff"}}>
+                                {lang.send}
+                            </Text>
+                        </Body>
+                    </Button>
                 </Content>
-                <Footer 
+            <Footer 
                 style={ footer_styles.footer_body }
             >
                  <FooterTab
@@ -97,16 +114,4 @@ export default class location_page extends React.Component{
 
 } 
 
-const styles = StyleSheet.create({
-    container: {
-      ...StyleSheet.absoluteFillObject,
-      height: 400,
-      width: 400,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
-    map: {
-      ...StyleSheet.absoluteFillObject,
-    },
-  });
 
