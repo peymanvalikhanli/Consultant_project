@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     img:{
         paddingVertical: 30,
         width: width*0.9,
-        height: width*0.9,
+        height: height*0.7,
         borderRadius: 5,
         marginTop: 20,
     },

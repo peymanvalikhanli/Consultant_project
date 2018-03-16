@@ -8,25 +8,12 @@ import footer_styles from './style/footer';
 import home_styles from './style/home';
 
 const datas = [
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-    'پیمان ولیخانلی',
-    'آناهیتا نیک بخت',
-  ];
+'نامه درخواست بیمه عمر',  
+'خسارت ماشین',
+'تبریک سال نو',  
+'اتمام مدت یبمه آتش سوزی',  
+'پیگری شخص ثالث',  
+];
 
 export default class message_page extends React.Component{
     constructor(props) {
@@ -59,7 +46,17 @@ export default class message_page extends React.Component{
         var {navigate}=this.props.navigation; 
         return(
             <Container>
-                <Header style={footer_styles.header}/>
+                <Header style={footer_styles.header}>
+                <Right>
+                        <Button transparent
+                        onPress={()=>this.props.navigation.replace("new_message") }
+                        > 
+                            <Text style={footer_styles.header_btn}>
+                            جدید
+                            </Text>
+                        </Button>
+                    </Right>
+                </Header>
                <Content>
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}

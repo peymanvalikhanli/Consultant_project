@@ -80,7 +80,7 @@ export default class profile_page extends React.Component{
                     </View>
                 </View>
                  <List style={main_styles.list}>
-                    {/* <ListItem itemDivider style={main_styles.list_div}>
+                    <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -106,7 +106,7 @@ export default class profile_page extends React.Component{
                     <Right>
                     <Icon name="mail" />
                     </Right>
-                    </ListItem> */}
+                    </ListItem>
                     <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
@@ -140,7 +140,7 @@ export default class profile_page extends React.Component{
                     <Icon name="card" />
                     </Right>
                     </ListItem>
-                    {/* <ListItem itemDivider style={main_styles.list_div}>
+                    <ListItem itemDivider style={main_styles.list_div}>
                         <Text></Text>
                     </ListItem>     
                     <ListItem icon>
@@ -153,7 +153,7 @@ export default class profile_page extends React.Component{
                         <Right>
                         <Icon name="help-buoy" />
                         </Right>
-                    </ListItem> */}
+                    </ListItem>
                 </List>
             </Content>
             <Footer 
