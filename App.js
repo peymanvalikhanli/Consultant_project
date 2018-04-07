@@ -24,8 +24,8 @@ import upload_file_page from './screens/upload_file';
 import RN from 'react-navigation'
 
 const nave = StackNavigator({
-//  introduction: { screen: introduction_page },
-//  verify:{ screen: verify_page},
+  introduction: { screen: introduction_page },
+  verify:{ screen: verify_page},
   Home: { screen: home_page },
   files: { screen: files_page },
   message: { screen: message_page },

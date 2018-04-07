@@ -7,13 +7,11 @@ import footer_styles from './style/footer';
 
 import home_styles from './style/home';
 
-const datas = [
-'نامه درخواست بیمه عمر',  
-'خسارت ماشین',
-'تبریک سال نو',  
-'اتمام مدت یبمه آتش سوزی',  
-'پیگری شخص ثالث',  
-];
+import server_url from './config/server_url.json';
+
+import axios from 'axios';
+
+const datas = [];
 
 export default class message_page extends React.Component{
     constructor(props) {
@@ -22,13 +20,28 @@ export default class message_page extends React.Component{
         this.state = {
           basic: true,
           listViewData: datas,
+          data:null
         };
+        this.get_data();
       }
       deleteRow(secId, rowId, rowMap) {
         rowMap[`${secId}${rowId}`].props.closeRow();
         const newData = [...this.state.listViewData];
         newData.splice(rowId, 1);
         this.setState({ listViewData: newData });
+        axios.post(server_url.messages, {
+            act: 'messages_delete',
+            ID: this.state.data[rowId].ID,
+          })
+          .then(response=> {
+            if(response.data.msg != undefined || response.data.msg != null){
+                this.get_data();
+            }
+          
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
       }
 
     async componentWillMount() {
@@ -42,7 +55,41 @@ export default class message_page extends React.Component{
         title:'',
         header: null,
     }; 
+
+    get_data(){
+        axios.post(server_url.messages, {
+            act: 'messages_get_by_user_id',
+            user_id: '58',
+          })
+          .then(response=> {
+            
+            if(response.data.msg != undefined || response.data.msg != null){
+                alert(response.data.msg);
+            }
+            if(response.data[0]!= undefined || response.data[0] != null ){
+                //  if(response.data.data == 1){
+                //      this.setState({is_change_page:true});
+                //     this.change_page();
+                //  }else{
+                //     alert(lang.error);
+                //  }
+                response.data.length   
+                this.setState({data:response.data});
+                data_res  = {};
+                for(index= 0 ; index<response.data.length ; index++){
+                    data_res[index]=response.data[index].title;
+                }
+                this.setState({listViewData:data_res});                
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
+    }
+        
+
     render(){ 
+       // this.get_data();
         var {navigate}=this.props.navigation; 
         return(
             <Container>

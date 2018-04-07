@@ -9,11 +9,16 @@ import lang from './localization/fa.json';
 
 import home_styles from './style/home';
 
+import server_url from './config/server_url.json';
+
+import axios from 'axios';
+
 export default class new_message_page extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-         
+            title: null, 
+            text: null,
         };
         Orientation.lockToPortrait();
       }
@@ -29,6 +34,38 @@ export default class new_message_page extends React.Component{
         title:'',
         header: null,
     }; 
+
+    btn_send_on_click(){
+        axios.post(server_url.messages, {
+            act: 'messages_set',
+            user_id: '58',
+            title:this.state.title,
+            text:this.state.text,
+            created_by:'0', 
+            replay_date:'0', 
+            replay:'0'
+          })
+          .then(response=> {
+            
+            if(response.data.msg != undefined || response.data.msg != null){
+                alert(response.data.msg);
+            }
+            if(response.data.data!= undefined || response.data.data != null ){
+                // if(response.data.data == 1){
+                //     this.setState({is_change_page:true});
+                //     this.change_page();
+                // }else{
+                //    alert(lang.error);
+                // }
+                alert(lang.send_message);
+            }
+                      
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
     render(){ 
         var {navigate}=this.props.navigation; 
         return(
@@ -50,7 +87,7 @@ export default class new_message_page extends React.Component{
                             </Label>
                             <Input
                                 maxLength={50}
-                                onChange={(event) => this.setState({country_id: event.nativeEvent.text})}
+                                onChange={(event) => this.setState({title: event.nativeEvent.text})}
                                 />
                                 
                         </Item>
@@ -60,13 +97,14 @@ export default class new_message_page extends React.Component{
                             </Label>
                             <Input
                                 multiline
-                                onChange={(event) => this.setState({country_id: event.nativeEvent.text})}
+                                onChange={(event) => this.setState({text: event.nativeEvent.text})}
                                 />
                                 
                         </Item>
                     </Form>
                     <Button
-                    style={{marginTop:20}}>   
+                    style={{marginTop:20}}
+                    onPress={()=>{this.btn_send_on_click()}}>   
                         <Body>
                             <Text style={{color:"#ffffff"}}>
                                 {lang.send}

@@ -9,6 +9,7 @@ import lang from './localization/fa.json';
 
 import home_styles from './style/home';
 
+
 export default class profile_edit_page extends React.Component{
     constructor(props) {
         super(props);
