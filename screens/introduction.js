@@ -1,6 +1,6 @@
 
 import React, { PureComponent } from 'react';
-import { Dimensions, Image, StyleSheet, View, NetInfo, Alert } from 'react-native';
+import { Dimensions, Image, StyleSheet, View, NetInfo, Alert, AsyncStorage } from 'react-native';
 import { Container, Header, Content, Footer, Button, Icon, Text, Body, Left, Right ,Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
 import SwiperFlatList from 'react-native-swiper-flatlist';
@@ -28,6 +28,7 @@ function handleFirstConnectivityChange(isConnected) {
             { cancelable: false }
           )
     }
+    
     NetInfo.isConnected.removeEventListener(
       'connectionChange',
       handleFirstConnectivityChange
@@ -54,16 +55,30 @@ export default class introduction_page extends PureComponent {
           is_change_page : false,
       }
       Orientation.lockToPortrait();
+     
+      AsyncStorage.getItem('user_profile', (err, result) => {
+         if(result!= null){
+            this.setState({is_change_page:true});
+            this.go_home_page();
+            // alert(result);
+        }  
+     });
     }
 
     change_page(){
         if(this.state.is_change_page){
-            this.props.navigation.replace("verify");
+            this.props.navigation.replace("verify",{phone:this.state.country_id+""+this.state.phone_number});
+        }
+    }
+
+    go_home_page(){
+        if(this.state.is_change_page){
+            this.props.navigation.replace("Home");
         }
     }
     
     btn_send_OnClick (){
-       
+        
         if(this.state.phone_number== null || this.state.phone_number == undefined || this.state.phone_number.length<10)
         {
             Alert.alert(
@@ -87,6 +102,7 @@ export default class introduction_page extends PureComponent {
                 return;
         }
        
+
         axios.post(server_url.mobo_user, {
             act: 'mobo_users_set',
             tel: this.state.country_id+""+this.state.phone_number,

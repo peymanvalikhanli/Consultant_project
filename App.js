@@ -6,6 +6,7 @@ import {
   Text, 
   View, 
   AppRegistry, 
+  AsyncStorage
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
@@ -23,6 +24,9 @@ import upload_file_page from './screens/upload_file';
 
 import RN from 'react-navigation'
 
+
+//AsyncStorage.clear();
+
 const nave = StackNavigator({
   introduction: { screen: introduction_page },
   verify:{ screen: verify_page},
@@ -38,6 +42,7 @@ const nave = StackNavigator({
 },{
   headerMode: "none"
 });
+
 export default nave;
 
 

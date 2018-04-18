@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ListView} from 'react-native';
+import {StyleSheet, ListView, AsyncStorage} from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 
 //import footer style
@@ -20,9 +20,18 @@ export default class message_page extends React.Component{
         this.state = {
           basic: true,
           listViewData: datas,
-          data:null
+          data:null,
+          user_id: 0
         };
-        this.get_data();
+
+        AsyncStorage.getItem('user_profile', (err, result) => {
+            if(result!= null){
+              //  alert(result);
+                var global_data = JSON.parse(result);
+                this.setState({user_id:global_data.ID});
+                this.get_data();
+            }
+        });
       }
       deleteRow(secId, rowId, rowMap) {
         rowMap[`${secId}${rowId}`].props.closeRow();
@@ -59,8 +68,9 @@ export default class message_page extends React.Component{
     get_data(){
         axios.post(server_url.messages, {
             act: 'messages_get_by_user_id',
-            user_id: '58',
+            user_id: this.state.user_id,
           })
+
           .then(response=> {
             
             if(response.data.msg != undefined || response.data.msg != null){

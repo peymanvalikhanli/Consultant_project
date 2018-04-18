@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet,  AsyncStorage} from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body } from 'native-base';
 import Orientation from 'react-native-orientation';
 //import footer style
@@ -11,6 +11,13 @@ import home_styles from './style/home';
 
 //import call lib 
 import call from 'react-native-phone-call'
+
+
+import server_url from './config/server_url.json';
+
+import axios from 'axios';
+
+
 
 export default class home_page extends React.Component{
 
@@ -31,8 +38,50 @@ export default class home_page extends React.Component{
       super();
       this.state={
           calling_number:"02126420740",
+          user_id:null,
       }
       Orientation.lockToPortrait();
+      
+      // You only need to define what will be added or updated
+      AsyncStorage.getItem('user_profile', (err, result) => {
+         if(result!= null){
+        //alert(result);
+        var global_data = JSON.parse(result);
+       
+        if (global_data.ID==null || global_data.ID == undefined ){
+            
+            //send packet to server and recive useer data from server
+            axios.post(server_url.mobo_user, {
+                act: 'mobo_users_get_by_tel',
+                tel: global_data.phone,
+              })
+              .then(response=> {
+                if(response.data[0].ID != undefined || response.data[0].ID != null){
+                    //this.get_data();
+                    //alert(response.data[0].ID);
+                    this.setState({user_id:response.data[0].ID});
+                    try {
+                        AsyncStorage.setItem('user_profile', JSON.stringify(response.data[0])); 
+                      } catch (error) {
+                        alert("can not write data in device");
+                      }
+                    
+                }else{
+                    alert(JSON.stringify(response.data[0]));
+                }
+              
+            })
+            .catch(function (error) {
+                alert("data load error");
+              });
+          }else{
+             // alert(global_data.ID); 
+          }
+        }else{
+              alert("data is null");
+          }
+      });
+
     }
 
     calling(){
@@ -46,6 +95,7 @@ export default class home_page extends React.Component{
   
     render(){ 
         var {navigate}=this.props.navigation; 
+        
         return(
             <Container style={ home_styles.body }>
                <Header style={footer_styles.header}/>

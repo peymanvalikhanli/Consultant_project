@@ -1,6 +1,6 @@
 
 import React, { PureComponent } from 'react';
-import { Dimensions, Image, StyleSheet, View, NetInfo, Alert } from 'react-native';
+import { Dimensions, Image, StyleSheet, View, NetInfo, Alert, AsyncStorage } from 'react-native';
 import { Container, Header, Content, Footer, Button, Icon, Text, Body, Left, Right ,Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
 
@@ -86,6 +86,15 @@ export default class verify_page extends PureComponent {
             }
             if(response.data.data!= undefined || response.data.data != null ){
                 if(response.data.data == 1){
+                    try {
+                        let user_profile = {
+                            phone:this.props.navigation.state.params.phone
+                        };  
+                        // await 
+                        AsyncStorage.setItem('user_profile', JSON.stringify(user_profile)); 
+                      } catch (error) {
+                        // Error saving data
+                      }
                     this.setState({is_change_page:true});
                     this.change_page();
                 }else{
