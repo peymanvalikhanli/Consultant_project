@@ -37,6 +37,10 @@ export default class upload_file_page extends React.Component{
         alert('salam peyman jun');
     }
 
+    btn_save_onclick(){
+        
+    }
+
     render(){ 
         var {navigate}=this.props.navigation;
         var name = this.props.navigation.state.params.name ;
