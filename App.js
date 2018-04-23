@@ -12,6 +12,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 import home_page from './screens/home'; 
 import files_page from './screens/files';
+import show_file from './screens/show_file'; 
 import message_page from './screens/messages';
 import new_message_page from './screens/new_message';
 import show_message from './screens/show_message';
@@ -33,6 +34,7 @@ const nave = StackNavigator({
   verify:{ screen: verify_page},
   Home: { screen: home_page },
   files: { screen: files_page },
+  show_file : {screen: show_file}, 
   message: { screen: message_page },
   new_message:{ screen: new_message_page},
   show_message:{ screen: show_message},

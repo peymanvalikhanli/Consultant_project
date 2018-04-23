@@ -58,22 +58,26 @@ export default class send_file_page extends React.Component {
                 }
                 if (response.data[0] != undefined || response.data[0] != null) {
                     response.data.length
-                    this.setState({ data: response.data });
+
                     data_res_open = {};
                     data_res_close = {};
                     data_res_cancel = {};
                     var index_open = 0;
                     var index_close = 0;
                     var index_cancel = 0;
+                    var main_data = response.data;
                     for (index = 0; index < response.data.length; index++) {
                         if (response.data[index].type == -1) {
                             data_res_cancel[index_cancel] = response.data[index].title;
+                            main_data[index].list_index = index_cancel;
                             index_cancel++;
                         } else if (response.data[index].type == 0) {
                             data_res_open[index_open] = response.data[index].title;
+                            main_data[index].list_index = index_open;
                             index_open++;
                         } else if (response.data[index].type == 1) {
                             data_res_close[index_close] = response.data[index].title;
+                            main_data[index].list_index = index_close;
                             index_close++;
                         }
                         //alert(data_res[index]);
@@ -81,6 +85,7 @@ export default class send_file_page extends React.Component {
                     this.setState({ listViewData_cancel: data_res_cancel });
                     this.setState({ listViewData_open: data_res_open });
                     this.setState({ listViewData_close: data_res_close });
+                    this.setState({ data: main_data });
                 }
             })
             .catch(function (error) {
@@ -88,10 +93,24 @@ export default class send_file_page extends React.Component {
             });
     }
 
+
     static navigationOptions = {
         title: '',
         header: null,
     };
+
+
+
+    btn_show_file(secId, rowId, rowMap, file_type) {
+        
+        for (index = 0; index < this.state.data.length; index++) {
+            if (this.state.data[index].list_index == rowId && this.state.data[index].type == file_type) {
+               // alert("this is a message"+ this.state.data[index].comment);
+               this.props.navigation.replace("show_file", { ID: this.state.data[index].ID });
+            }
+        }
+    }
+
     render() {
         var { navigate } = this.props.navigation;
         return (
@@ -111,14 +130,16 @@ export default class send_file_page extends React.Component {
                             <Body>
                                 <Text>
                                     {lang.file_open}
-                        </Text>
+                                </Text>
                             </Body>
                         </ListItem>
                     </List>
                     <List style={main_styles.list}
                         dataSource={this.ds.cloneWithRows(this.state.listViewData_open)}
                         renderRow={(data, secId, rowId, rowMap) =>
-                            <ListItem icon>
+                            <ListItem icon
+                                onPress={_ => this.btn_show_file(secId, rowId, rowMap, 0)}
+                            >
                                 <Right />
                                 <Body>
                                     <Text>{data}</Text>
@@ -136,14 +157,15 @@ export default class send_file_page extends React.Component {
                             <Body>
                                 <Text>
                                     {lang.file_close}
-                        </Text>
+                                </Text>
                             </Body>
                         </ListItem>
                     </List>
                     <List style={main_styles.list}
                         dataSource={this.ds.cloneWithRows(this.state.listViewData_close)}
                         renderRow={(data, secId, rowId, rowMap) =>
-                            <ListItem icon>
+                            <ListItem icon
+                            onPress={_ => this.btn_show_file(secId, rowId, rowMap, 1)}>
                                 <Right />
                                 <Body>
                                     <Text>{data}</Text>
@@ -160,15 +182,16 @@ export default class send_file_page extends React.Component {
                         <ListItem itemDivider style={main_styles.list_div}>
                             <Body>
                                 <Text>
-                                  {lang.file_cancel}
-                        </Text>
+                                    {lang.file_cancel}
+                                </Text>
                             </Body>
                         </ListItem>
                     </List>
                     <List style={main_styles.list}
                         dataSource={this.ds.cloneWithRows(this.state.listViewData_cancel)}
                         renderRow={(data, secId, rowId, rowMap) =>
-                            <ListItem icon>
+                            <ListItem icon
+                            onPress={_ => this.btn_show_file(secId, rowId, rowMap, -1)}>
                                 <Right />
                                 <Body>
                                     <Text>{data}</Text>

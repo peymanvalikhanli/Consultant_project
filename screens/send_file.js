@@ -106,7 +106,7 @@ export default class send_file_page extends React.Component{
                             </Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon
+                    {/* <ListItem icon
                     onPress={()=>this.props.navigation.replace("upload_file",{name:lang.Photo_ID,parent:"send_file"})}
                     >
                         <Left>
@@ -117,7 +117,7 @@ export default class send_file_page extends React.Component{
                                 {lang.Photo_ID}
                             </Text>
                         </Body>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
             </Content>
             <Footer 

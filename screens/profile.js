@@ -9,17 +9,24 @@ import main_styles from './style/main';
 
 import lang from './localization/fa.json';
 
+import server_url from './config/server_url.json';
+
+import axios from 'axios';
+
 
 export default class profile_page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            avatar: null,
+            uri: [{ size: 0 }],
             user_profile:
                 {
                     name: "",
                     last_name: "",
                     tel: ""
-                }
+                },
+            user_avatar: null 
         };
         Orientation.lockToPortrait();
         AsyncStorage.getItem('user_profile', (err, result) => {
@@ -27,9 +34,10 @@ export default class profile_page extends React.Component {
                 //  alert(result);
                 var global_data = JSON.parse(result);
                 this.setState({ user_profile: global_data });
-
+                this.get_data();
             }
         });
+
     }
 
     async componentWillMount() {
@@ -43,6 +51,58 @@ export default class profile_page extends React.Component {
         title: '',
         header: null,
     };
+
+    get_data() {
+        axios.post(server_url.attachments, {
+            act: 'attachments_get_by_user_id',
+            user_id: this.state.user_profile.ID,
+        })
+
+            .then(response => {
+
+                if (response.data.msg != undefined || response.data.msg != null) {
+                    alert(response.data.msg);
+                }
+                if (response.data[0] != undefined || response.data[0] != null) {
+                    var url_avatar = null;
+                    for (index = 0; index < response.data.length; index++) {
+                        if (response.data[index].name == 'avatar') {
+                            url_avatar = response.data[index].url;
+                        }
+                    }
+                    
+                    this.setState({ user_avatar: 'http://app.fonoontadbir.ir/controller_robo/'+url_avatar });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    save_avatar() {
+        var timestamp = Date.now();
+        var photo = {
+            file: this.state.avatar,
+            type: "avatar",
+            user_id: this.state.user_profile.ID
+
+        };
+        const config = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+        var request = _.extend({
+            body: JSON.stringify(photo)
+        }, config);
+        fetch(server_url.upload, request)
+            .then((response) => response.json())
+            .then((data) => {
+                alert(lang.success);
+            })
+    }
     render() {
         var { navigate } = this.props.navigation;
         return (
@@ -73,6 +133,10 @@ export default class profile_page extends React.Component {
                             <PhotoUpload
                                 onPhotoSelect={avatar => {
                                     if (avatar) {
+                                        this.setState({
+                                            avatar: avatar
+                                        });
+                                        this.save_avatar();
                                         console.log('Image base64 string: ', avatar)
                                     }
                                 }}
@@ -86,7 +150,7 @@ export default class profile_page extends React.Component {
                                     }}
                                     resizeMode='cover'
                                     source={
-                                        require('./img/default_avatar.jpg')
+                                        this.state.user_avatar == null ? require('./img/default_avatar.jpg') : { uri: this.state.user_avatar }
                                     }
                                 />
                             </PhotoUpload>
@@ -99,7 +163,7 @@ export default class profile_page extends React.Component {
                         </View>
                     </View>
                     <List style={main_styles.list}>
-                       {/* <ListItem itemDivider style={main_styles.list_div}>
+                        {/* <ListItem itemDivider style={main_styles.list_div}>
                             <Text></Text>
                         </ListItem>
                          <ListItem icon>

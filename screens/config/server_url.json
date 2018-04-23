@@ -6,5 +6,6 @@
     "locations":"http://app.fonoontadbir.ir/controller_robo/controller_locations.php",
     "messages":"http://app.fonoontadbir.ir/controller_robo/controller_messages.php",
     "setting":"http://app.fonoontadbir.ir/controller_robo/controller_setting.php",
-    "user_location":"http://app.fonoontadbir.ir/controller_robo/controller_user_location.php"
+    "user_location":"http://app.fonoontadbir.ir/controller_robo/controller_user_location.php",
+    "upload":"http://app.fonoontadbir.ir/controller_robo/upload_test.php"
 }
