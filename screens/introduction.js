@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     color:"#1bbbc4",
   },
   form:{
-    width: width*0.4,
+    width: width*0.6,
     marginTop: height*0.1,
   },
   form_btn:{
