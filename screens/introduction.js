@@ -143,7 +143,7 @@ export default class introduction_page extends PureComponent {
                             <Body style={{backgroundColor:"#f0f0f0"}}>
                                 <Image 
                                     style={styles.img}
-                                    source={require("./img/introduction.png")}
+                                    source={require("./img/introduction1.png")}
                                 />
                             </Body>
                         </View>

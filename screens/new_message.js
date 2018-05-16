@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ListView} from 'react-native';
+import {StyleSheet, ListView , AsyncStorage} from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
 //import footer style
@@ -19,8 +19,19 @@ export default class new_message_page extends React.Component{
         this.state = {
             title: null, 
             text: null,
+            user_id: 0
         };
         Orientation.lockToPortrait();
+
+        AsyncStorage.getItem('user_profile', (err, result) => {
+            if (result != null) {
+                //  alert(result);
+                var global_data = JSON.parse(result);
+                this.setState({ user_id: global_data.ID });
+                this.get_data();
+            }
+        });
+
       }
       
     async componentWillMount() {
@@ -38,7 +49,7 @@ export default class new_message_page extends React.Component{
     btn_send_on_click(){
         axios.post(server_url.messages, {
             act: 'messages_set',
-            user_id: '58',
+            user_id: this.state.user_id,
             title:this.state.title,
             text:this.state.text,
             created_by:'0', 
