@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, ListView, Image, AsyncStorage } from 'react-native';
+import { Dimensions, StyleSheet, ListView, Image, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
 //import footer style
@@ -31,6 +31,14 @@ export default class upload_file_page extends React.Component {
             }
         });
 
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async componentWillMount() {
@@ -97,6 +105,15 @@ export default class upload_file_page extends React.Component {
                     <Right />
                 </Header>
                 <Content>
+                    <Button
+                        style={{ marginTop: 20 }}
+                        onPress={() => { this.btn_save() }}>
+                        <Body>
+                            <Text style={{ color: "#ffffff" }}>
+                                {lang.save}
+                            </Text>
+                        </Body>
+                    </Button>
                     <Body>
                         <PhotoUpload
                             onPhotoSelect={avatar => {
@@ -115,15 +132,7 @@ export default class upload_file_page extends React.Component {
                             />
                         </PhotoUpload>
                     </Body>
-                    <Button
-                        style={{ marginTop: 20 }}
-                        onPress={() => { this.btn_save() }}>
-                        <Body>
-                            <Text style={{ color: "#ffffff" }}>
-                                {lang.save}
-                            </Text>
-                        </Body>
-                    </Button>
+
 
                 </Content>
                 <Footer

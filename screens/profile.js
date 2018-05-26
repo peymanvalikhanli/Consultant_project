@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Image, View, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch, Title } from 'native-base';
 import Orientation from 'react-native-orientation';
 import PhotoUpload from 'react-native-photo-upload';
@@ -26,7 +26,7 @@ export default class profile_page extends React.Component {
                     last_name: "",
                     tel: ""
                 },
-            user_avatar: null 
+            user_avatar: null
         };
         Orientation.lockToPortrait();
         AsyncStorage.getItem('user_profile', (err, result) => {
@@ -38,6 +38,14 @@ export default class profile_page extends React.Component {
             }
         });
 
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async componentWillMount() {
@@ -70,8 +78,8 @@ export default class profile_page extends React.Component {
                             url_avatar = response.data[index].url;
                         }
                     }
-                    
-                    this.setState({ user_avatar: 'http://app.fonoontadbir.ir/controller_robo/'+url_avatar });
+
+                    this.setState({ user_avatar: 'http://app.fonoontadbir.ir/controller_robo/' + url_avatar });
                 }
             })
             .catch(function (error) {

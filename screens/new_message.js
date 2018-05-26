@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ListView , AsyncStorage} from 'react-native';
+import { StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Form, Item, Input, Label } from 'native-base';
 import Orientation from 'react-native-orientation';
 //import footer style
@@ -13,11 +13,11 @@ import server_url from './config/server_url.json';
 
 import axios from 'axios';
 
-export default class new_message_page extends React.Component{
+export default class new_message_page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: null, 
+            title: null,
             text: null,
             user_id: 0
         };
@@ -28,69 +28,91 @@ export default class new_message_page extends React.Component{
                 //  alert(result);
                 var global_data = JSON.parse(result);
                 this.setState({ user_id: global_data.ID });
-                this.get_data();
             }
         });
 
-      }
-      
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
-          'Roboto': require('native-base/Fonts/Roboto.ttf'),
-          'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+            'Roboto': require('native-base/Fonts/Roboto.ttf'),
+            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
         });
-      }
+    }
 
     static navigationOptions = {
-        title:'',
+        title: '',
         header: null,
-    }; 
+    };
 
-    btn_send_on_click(){
+    btn_send_on_click() {
         axios.post(server_url.messages, {
             act: 'messages_set',
             user_id: this.state.user_id,
-            title:this.state.title,
-            text:this.state.text,
-            created_by:'0', 
-            replay_date:'0', 
-            replay:'0'
-          })
-          .then(response=> {
-            
-            if(response.data.msg != undefined || response.data.msg != null){
-                alert(response.data.msg);
-            }
-            if(response.data.data!= undefined || response.data.data != null ){
-                // if(response.data.data == 1){
-                //     this.setState({is_change_page:true});
-                //     this.change_page();
-                // }else{
-                //    alert(lang.error);
-                // }
-                alert(lang.send_message);
-            }
-                      
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            title: this.state.title,
+            text: this.state.text,
+            created_by: '0',
+            replay_date: '0',
+            replay: '0'
+        })
+            .then(response => {
+
+                if (response.data.msg != undefined || response.data.msg != null) {
+                    alert(response.data.msg);
+                }
+                if (response.data.data != undefined || response.data.data != null) {
+                    // if(response.data.data == 1){
+                    //     this.setState({is_change_page:true});
+                    //     this.change_page();
+                    // }else{
+                    //    alert(lang.error);
+                    // }
+                    alert(lang.send_message);
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
-    render(){ 
-        var {navigate}=this.props.navigation; 
-        return(
+    render() {
+        var { navigate } = this.props.navigation;
+        var parent = this.props.navigation.state.params.parent;
+        return (
             <Container>
                 <Header style={footer_styles.header}>
-                    <Left/>
+                    <Left>
+                        <Button transparent
+                            onPress={() => this.props.navigation.replace(parent)}>
+                            <Icon style={footer_styles.header_btn} name='arrow-back' />
+                        </Button>
+                    </Left>
                     <Body>
                         <Title style={footer_styles.header_btn}>
-                        {lang.new_message}
+                            {lang.new_message}
                         </Title>
                     </Body>
-                    <Right/>
+                    <Right />
                 </Header>
-               <Content>
+                <Content>
+                    <Button
+                        style={{ marginTop: 20 }}
+                        onPress={() => { this.btn_send_on_click() }}>
+                        <Body>
+                            <Text style={{ color: "#ffffff" }}>
+                                {lang.send}
+                            </Text>
+                        </Body>
+                    </Button>
                     <Form >
                         <Item floatingLabel>
                             <Label>
@@ -98,9 +120,9 @@ export default class new_message_page extends React.Component{
                             </Label>
                             <Input
                                 maxLength={50}
-                                onChange={(event) => this.setState({title: event.nativeEvent.text})}
-                                />
-                                
+                                onChange={(event) => this.setState({ title: event.nativeEvent.text })}
+                            />
+
                         </Item>
                         <Item floatingLabel>
                             <Label>
@@ -108,59 +130,51 @@ export default class new_message_page extends React.Component{
                             </Label>
                             <Input
                                 multiline
-                                onChange={(event) => this.setState({text: event.nativeEvent.text})}
-                                />
-                                
+                                onChange={(event) => this.setState({ text: event.nativeEvent.text })}
+                            />
+
                         </Item>
                     </Form>
-                    <Button
-                    style={{marginTop:20}}
-                    onPress={()=>{this.btn_send_on_click()}}>   
-                        <Body>
-                            <Text style={{color:"#ffffff"}}>
-                                {lang.send}
-                            </Text>
-                        </Body>
-                    </Button>
+
                 </Content>
-            <Footer 
-                style={ footer_styles.footer_body }
-            >
-                 <FooterTab
-                style={ footer_styles.footer_body }>
-                    <Button 
-                        vertical
-                        onPress={()=>this.props.navigation.replace("files") }
-                    >
-                        <Icon active name="folder-open" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>
-                            {lang.file}
-                        </Text>
-                    </Button>
-                    <Button 
-                        vertical
-                        onPress={()=>this.props.navigation.replace("message") }
-                    >
-                        <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>
-                            {lang.messages}
-                        </Text>
-                    </Button>
-                    <Button 
-                        vertical
-                        onPress={()=>this.props.navigation.replace("Home") }
-                    >
-                        <Icon active name="md-home" style={footer_styles.footer_btn} />
-                        <Text style={footer_styles.footer_btn}>
-                            {lang.home}
-                        </Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+                <Footer
+                    style={footer_styles.footer_body}
+                >
+                    <FooterTab
+                        style={footer_styles.footer_body}>
+                        <Button
+                            vertical
+                            onPress={() => this.props.navigation.replace("files")}
+                        >
+                            <Icon active name="folder-open" style={footer_styles.footer_btn} />
+                            <Text style={footer_styles.footer_btn}>
+                                {lang.file}
+                            </Text>
+                        </Button>
+                        <Button
+                            vertical
+                            onPress={() => this.props.navigation.replace("message")}
+                        >
+                            <Icon active name="ios-chatbubbles" style={footer_styles.footer_btn} />
+                            <Text style={footer_styles.footer_btn}>
+                                {lang.messages}
+                            </Text>
+                        </Button>
+                        <Button
+                            vertical
+                            onPress={() => this.props.navigation.replace("Home")}
+                        >
+                            <Icon active name="md-home" style={footer_styles.footer_btn} />
+                            <Text style={footer_styles.footer_btn}>
+                                {lang.home}
+                            </Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </Container>
         );
     }
 
-} 
+}
 
 

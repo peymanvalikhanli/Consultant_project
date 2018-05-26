@@ -9,7 +9,7 @@ import main_styles from './style/main';
 
 import lang from './localization/fa.json';
 
-export default class send_file_page extends React.Component{
+export default class help_page extends React.Component{
 
     componentDidMount() {
         BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);

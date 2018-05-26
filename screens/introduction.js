@@ -143,7 +143,7 @@ export default class introduction_page extends PureComponent {
                             <Body style={{backgroundColor:"#f0f0f0"}}>
                                 <Image 
                                     style={styles.img}
-                                    source={require("./img/introduction1.png")}
+                                    source={require("./img/introduction1.jpeg")}
                                 />
                             </Body>
                         </View>
@@ -163,7 +163,7 @@ export default class introduction_page extends PureComponent {
                                         +98
                                     </Input>
                                     <Input
-                                        keyboardType="phone-pad"
+                                        keyboardType="numeric"
                                         placeholder="###-####-###"
                                         maxLength={10}
                                         onChange={(event) => this.setState({phone_number: event.nativeEvent.text})}

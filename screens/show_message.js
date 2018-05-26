@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ListView, AsyncStorage } from 'react-native';
+import { StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 
 //import footer style
@@ -25,6 +25,14 @@ export default class show_message extends React.Component {
         };
         this.get_data();
 
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async componentWillMount() {

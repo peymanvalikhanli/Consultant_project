@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ListView, AsyncStorage } from 'react-native';
+import { StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 
 //import footer style
@@ -34,6 +34,13 @@ export default class message_page extends React.Component {
                 this.get_data();
             }
         });
+    }
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
     deleteRow(secId, rowId, rowMap) {
         rowMap[`${secId}${rowId}`].props.closeRow();
@@ -107,7 +114,7 @@ export default class message_page extends React.Component {
                 <Header style={footer_styles.header}>
                     <Right>
                         <Button transparent
-                            onPress={() => this.props.navigation.replace("new_message")}
+                            onPress={() => this.props.navigation.replace("new_message", { parent: "message" })}
                         >
                             <Text style={footer_styles.header_btn}>
                                 جدید

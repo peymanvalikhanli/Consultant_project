@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, ListView, View, Geolocation, AsyncStorage } from 'react-native';
+import { Dimensions, StyleSheet, ListView, View, Geolocation, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 import Orientation from 'react-native-orientation';
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
@@ -37,6 +37,14 @@ export default class location_page extends React.Component {
             }
         });
         this.onMapPress = this.onMapPress.bind(this);
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async componentWillMount() {
@@ -141,6 +149,17 @@ export default class location_page extends React.Component {
                 </Header>
                 <Content>
                     <Body>
+                        <Button
+                            style={{ marginTop: 20 }}
+                            onPress={() => { this.btn_send_location() }}>
+                            <Body>
+                                <Text style={{ color: "#ffffff" }}>
+                                    {lang.send}
+                                </Text>
+                            </Body>
+                        </Button>
+                    </Body>
+                    <Body>
                         <MapView
                             style={styles.map}
                             onPress={this.onMapPress}
@@ -159,15 +178,6 @@ export default class location_page extends React.Component {
                             />
                         </MapView>
                     </Body>
-                    <Button
-                        style={{ marginTop: 20 }}
-                        onPress={() => { this.btn_send_location() }}>
-                        <Body>
-                            <Text style={{ color: "#ffffff" }}>
-                                {lang.send}
-                            </Text>
-                        </Body>
-                    </Button>
                 </Content>
                 <Footer
                     style={footer_styles.footer_body}

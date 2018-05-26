@@ -111,7 +111,7 @@ export default class home_page extends React.Component{
                     </Body>
                     </ListItem>
                     <ListItem style={ home_styles.message }
-                        onPress={()=>this.props.navigation.replace("new_message") }>
+                        onPress={()=>this.props.navigation.replace("new_message",{parent:"Home"}) }>
                     <Thumbnail square size={80} source={require('./img/img_new_meassage.png')} style={home_styles.btn_img} />
                     <Body>
                         <Text style={ home_styles.text }>

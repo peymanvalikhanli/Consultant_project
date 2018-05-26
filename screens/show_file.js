@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ListView, AsyncStorage } from 'react-native';
+import { StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
 
 //import footer style
@@ -25,6 +25,13 @@ export default class show_file extends React.Component {
         };
         this.get_data();
 
+    }
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async componentWillMount() {
@@ -65,9 +72,17 @@ export default class show_file extends React.Component {
     render() {
 
         var { navigate } = this.props.navigation;
+
         return (
             <Container>
                 <Header style={footer_styles.header}>
+                    <Left>
+                        <Button transparent
+                            onPress={() => this.props.navigation.replace('files')}>
+                            <Icon style={footer_styles.header_btn} name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body/>
                     <Right />
                 </Header>
                 <Content>
