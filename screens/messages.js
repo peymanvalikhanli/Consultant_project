@@ -42,6 +42,11 @@ export default class message_page extends React.Component {
     componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
+
+    handleBackButton() {
+        return true;
+    }
+
     deleteRow(secId, rowId, rowMap) {
         rowMap[`${secId}${rowId}`].props.closeRow();
         const newData = [...this.state.listViewData];

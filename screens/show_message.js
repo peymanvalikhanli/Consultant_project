@@ -35,6 +35,10 @@ export default class show_message extends React.Component {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -61,7 +65,7 @@ export default class show_message extends React.Component {
                 if (response.data[0] != undefined || response.data[0] != null) {
                     this.setState({ title: response.data[0].title });
                     this.setState({ text: response.data[0].text });
-                   // alert(this.state.text);
+                    // alert(this.state.text);
                 }
             })
             .catch(function (error) {
@@ -111,7 +115,7 @@ export default class show_message extends React.Component {
                 <Footer
                     style={footer_styles.footer_body}
                 >
-                     <FooterTab
+                    <FooterTab
                         style={footer_styles.footer_body}>
                         <Button
                             vertical

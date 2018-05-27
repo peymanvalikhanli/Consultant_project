@@ -41,6 +41,10 @@ export default class new_message_page extends React.Component {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -57,7 +61,7 @@ export default class new_message_page extends React.Component {
         axios.post(server_url.messages, {
             act: 'messages_set',
             user_id: this.state.user_id,
-            title: this.state.title,
+            title: this.state.title == '' || this.state.title == undefined ? lang.no_title : this.state.title,
             text: this.state.text,
             created_by: '0',
             replay_date: '0',

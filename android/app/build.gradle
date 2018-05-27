@@ -99,7 +99,7 @@ android {
 
     defaultConfig {
         applicationId "com.consultant_project"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -154,6 +154,8 @@ signingConfigs {
 }
 
 dependencies {
+    compile project(':react-native-pdf')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-fs')
     compile project(':react-native-image-resizer')
     compile project(':react-native-image-picker')

@@ -48,6 +48,10 @@ export default class profile_edit_page extends React.Component {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -121,7 +125,7 @@ export default class profile_edit_page extends React.Component {
                     </Left>
                     <Body>
                         <Title style={footer_styles.header_btn}>
-                            {lang.new_message}
+                            {lang.profile}
                         </Title>
                     </Body>
                     <Right />

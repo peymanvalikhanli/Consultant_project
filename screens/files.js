@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, AsyncStorage, ListView } from 'react-native';
+import { StyleSheet, Image, View, AsyncStorage, ListView, BackAndroid } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Switch, Title } from 'native-base';
 
 import UserAvatar from 'react-native-user-avatar';
@@ -38,6 +38,19 @@ export default class send_file_page extends React.Component {
             }
         });
     }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),

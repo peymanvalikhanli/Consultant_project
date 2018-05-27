@@ -47,6 +47,10 @@ export default class location_page extends React.Component {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),

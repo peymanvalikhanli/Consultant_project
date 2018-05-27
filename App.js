@@ -23,6 +23,7 @@ import location_page from './screens/location';
 import verify_page from './screens/verify';
 import profile_edit_page from './screens/profile_edit';
 import upload_file_page from './screens/upload_file'; 
+import help_page from './screens/help'; 
 
 import RN from 'react-navigation'
 
@@ -43,6 +44,7 @@ const nave = StackNavigator({
   send_file: {screen: send_file_page},
   location: {screen: location_page},
   upload_file: { screen: upload_file_page},
+  help: { screen: help_page},
 },{
   headerMode: "none"
 });

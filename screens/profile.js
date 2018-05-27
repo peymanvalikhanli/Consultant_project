@@ -48,6 +48,10 @@ export default class profile_page extends React.Component {
         BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+        return true;
+    }
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -234,7 +238,9 @@ export default class profile_page extends React.Component {
                         <ListItem itemDivider style={main_styles.list_div}>
                             <Text></Text>
                         </ListItem>
-                        <ListItem icon>
+                        <ListItem icon
+                            onPress={() => this.props.navigation.replace("help")}
+                        >
                             <Left>
                                 <Icon name="arrow-back" />
                             </Left>
