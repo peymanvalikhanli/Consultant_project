@@ -195,13 +195,14 @@ export const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#ffffff',
+    height:height*0.87
   },
   child: {
     height: height*0.905,
     width,
     justifyContent: 'center',
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#ffffff',
   },
   text: {
     marginTop: height*0.1,
@@ -214,12 +215,13 @@ const styles = StyleSheet.create({
   },
   form_btn:{
     marginTop: height*0.2,
-    width:width*0.4,
+    marginLeft: width*0.05,
+    width:width*0.5,
     backgroundColor:"#1bbbc4",
   },
   img:{
-      width,
-      height:width*0.9,
+      width:width*0.8,
+      height:width*0.8*1.7,
       marginTop: width*0.1,
       justifyContent: 'center',
       alignItems: 'stretch',

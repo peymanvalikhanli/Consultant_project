@@ -80,6 +80,13 @@ export default class show_message extends React.Component {
         return (
             <Container>
                 <Header style={footer_styles.header}>
+                    <Left>
+                        <Button transparent
+                            onPress={() => this.props.navigation.replace("message")}>
+                            <Icon style={footer_styles.header_btn} name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body />
                     <Right />
                 </Header>
                 <Content>
@@ -102,15 +109,12 @@ export default class show_message extends React.Component {
                             <Text>{lang.text}</Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
-                        <Left />
-                        <Body>
-                            <Text>
-                                {this.state.text}
-                            </Text>
-                        </Body>
-                        <Right />
-                    </ListItem>
+                    <Body>
+                        <Text>
+                            {this.state.text}
+                        </Text>
+                    </Body>
+
                 </Content>
                 <Footer
                     style={footer_styles.footer_body}

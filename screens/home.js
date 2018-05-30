@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet,  AsyncStorage} from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Title } from 'native-base';
 import Orientation from 'react-native-orientation';
 //import footer style
 import footer_styles from './style/footer';
@@ -98,7 +98,15 @@ export default class home_page extends React.Component{
         
         return(
             <Container style={ home_styles.body }>
-               <Header style={footer_styles.header}/>
+               <Header style={footer_styles.header}>
+                <Left>
+
+                    </Left>
+                <Body>
+                    <Title style={{color:"#ffffff"}}>{lang.app_name}</Title>
+                </Body>
+                
+               </Header>
                <Content>
                 <List>
                     <ListItem style={ home_styles.clling } 

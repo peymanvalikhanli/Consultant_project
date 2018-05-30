@@ -47,8 +47,10 @@ export default class help_page extends React.Component {
     };
     render() {
         var { navigate } = this.props.navigation;
-        const source = require('./asset/help.pdf');  // ios only
-
+        // const source = require('./asset/help.pdf');  // ios only
+        const source = {uri:'http://app.fonoontadbir.ir/help/help.pdf',cache:true};
+        
+       
         return (
             <Container>
                 <Header style={footer_styles.header}>

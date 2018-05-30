@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right } from 'native-base';
+import { Dimensions, StyleSheet, ListView, AsyncStorage, BackAndroid } from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, List, ListItem, Thumbnail, Body, Left, Right, Label } from 'native-base';
 
 //import footer style
 import footer_styles from './style/footer';
@@ -109,15 +109,11 @@ export default class show_file extends React.Component {
                             <Text>{lang.text}</Text>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
-                        <Left />
-                        <Body>
-                            <Text>
-                                {this.state.text}
-                            </Text>
-                        </Body>
-                        <Right />
-                    </ListItem>
+                    <Body>
+                        <Text >
+                            {this.state.text}
+                        </Text>
+                    </Body>
                 </Content>
                 <Footer
                     style={footer_styles.footer_body}
@@ -159,4 +155,11 @@ export default class show_file extends React.Component {
 
 }
 
+export const { width, height } = Dimensions.get('window');
+const styles = StyleSheet.create({
+    text: {
 
+        height: height
+    },
+
+});
