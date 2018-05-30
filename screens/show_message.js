@@ -114,7 +114,6 @@ export default class show_message extends React.Component {
                             {this.state.text}
                         </Text>
                     </Body>
-
                 </Content>
                 <Footer
                     style={footer_styles.footer_body}
